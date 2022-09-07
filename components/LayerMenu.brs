@@ -8,12 +8,38 @@ sub init()
     m.top.itemSpacing = [ 20, 20 ]
     m.top.translation = [50, 50]
 
-    m.readPosterGridTask = createObject("roSGNode", "ContentReader")
-    m.readPosterGridTask.contenturi = "https://api.npoint.io/b096a65d709fbe682348"
-    m.readPosterGridTask.observeField("content", "showpostergrid")
-    m.readPosterGridTask.control = "RUN"
+    m.top.observeField("itemSelected", "showDetails")
+    m.top.observeField("itemFocused", "changeTopDescText")
 end sub
 
-sub showpostergrid()
-    m.top.content = m.readPosterGridTask.content
+sub changeTopDescText()
+
+    if m.top.content <> invalid then
+        temp = m.top.findNode("lbTopDesc")
+        contentChild = m.top.content.getChild(m.top.itemFocused)
+        temp.text = contentChild.description
+    end if
 end sub
+
+sub showDetails()
+    'm.top.setFocus(false)
+    m.details = m.top.findNode("details")
+    m.details.setFocus(true)
+    contentChild = m.top.content.getChild(m.top.itemSelected)
+    description = m.details.findNode("lbDescription")
+    description.text = "Description: " + contentChild.description
+    m.details.visible = true
+end sub
+
+function onKeyEvent(key as String, press as Boolean) as Boolean
+    handled = false
+  
+    if key = "back" and m.details.visible = true then
+        'm.top.setFocus(true)
+      m.details.visible = false
+      handled = true
+    end if
+  
+    return handled
+end function
+  

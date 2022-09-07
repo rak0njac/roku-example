@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="LayerMenu" extends="PosterGrid">
   <script type="text/brightscript" uri="LayerMenu.brs"/>
+
+  <children>
+    <Label
+        id="lbTopDesc"
+        width = "0"
+        height = "44"
+        translation="[0,0]"
+    />
+    <LayerDetails
+        visible = "false"
+        id="details"
+        color="0x2B008FF0"
+        width="1180"
+        height="620"
+        translation="[0,0]"
+        />
+  </children>
 </component>

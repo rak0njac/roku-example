@@ -2,7 +2,6 @@
 <component name = "ContentReader" extends = "Task" >
 
   <interface>
-    <field id = "contenttype" type = "string" />
     <field id = "contenturi" type = "uri" />
     <field id = "content" type = "node" />
   </interface>

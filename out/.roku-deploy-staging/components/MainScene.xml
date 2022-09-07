@@ -20,13 +20,5 @@
       itemSpacing = "[ 20, 20 ]" 
     />
 
-    <LayerDetails
-      visible = "false"
-      id="lDetails"
-      color="0x2B008FF0"
-      width="1180"
-      height="620"
-      translation="[50,50]"
-    />
   </children>
 </component>
