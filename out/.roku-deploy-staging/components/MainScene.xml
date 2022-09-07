@@ -3,28 +3,30 @@
   <script type="text/brightscript" uri="MainScene.brs"/>
 
 	<children>
-    <Video    
-      id="testVideo"
+    <LayerVideo    
+      id="lVideo"
       width="1280"
       height="720"
       translation="[0,0]"
     />
 
-    <Rectangle
-      id="testRect"
-      color="0x2B008FF0"
-      width="1230"
-      height="670"
-      translation="[0,0]"
-    />
-
-    <PosterGrid 
-      id = "examplePosterGrid" 
+    <LayerMenu 
+      visible = "true"
+      id = "lMenu" 
       basePosterSize = "[ 150, 229 ]" 
       caption1NumLines = "1" 
-      numColumns = "5" 
+      numColumns = "6" 
       numRows = "2" 
       itemSpacing = "[ 20, 20 ]" 
+    />
+
+    <LayerDetails
+      visible = "false"
+      id="lDetails"
+      color="0x2B008FF0"
+      width="1180"
+      height="620"
+      translation="[50,50]"
     />
   </children>
 </component>
