@@ -2,8 +2,8 @@ sub init()
     m.grid = m.top.findNode("lGrid")
     m.details = m.top.findNode("details")
     m.grid.setFocus(true)
-    m.desctext = m.top.findNode("lbTopDesc")
-    m.buttongrp = m.top.findNode("btns")
+    m.descText = m.top.findNode("lbTopDesc")
+    m.buttonGrp = m.top.findNode("btnGrp")
 
     m.buttongrp.buttons = ["Play", "Close"]
 

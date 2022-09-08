@@ -1,58 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="LayerDetails" extends="Rectangle">
-
-<interface>
-           <field id = "vidurl" type = "uri" /> 
-</interface>
-
 	<children>
-                        <Poster
+		<Poster
                 id="imgPoster"
                 translation="[55,55]"
                 />
-        <LayoutGroup translation="[200,55]" itemSpacings = "[20]">
-                <Label
-                id="lbCast"
-                horizAlign = "left"
-                />
 
-                <Label
-                id="lbYear"
-                horizAlign = "left"
-                />
-
-                <Label
-                id="lbTitle"
-                horizAlign = "left"
-                />
-
-                <Label
-                id="lbGenres"
-                horizAlign = "left"
-                />
-
-                <Label
-                id="lbLength"
-                horizAlign = "left"
-                />
-
-                <Label
-                id="lbDirector"
-                horizAlign = "left"
-                />
-
-                        <Label
-                id="lbRating"
-                horizAlign = "left"
-                />
-
-                                        <Label
-                id="lbDescription"
-                width="1000"
-                wrap = "true"
-                />
-
-                <ButtonGroup layoutDirection="horiz" itemSpacings = "[20]" id="btns"/>
-        </LayoutGroup>
-        </children>
+		<LayoutGroup translation="[200,55]" itemSpacings = "[20]">
+			<Label
+                        id="lbCast"
+                        horizAlign = "left"
+                        />
+			<Label
+                        id="lbYear"
+                        horizAlign = "left"
+                        />
+			<Label
+                        id="lbTitle"
+                        horizAlign = "left"
+                        />
+			<Label
+                        id="lbGenres"
+                        horizAlign = "left"
+                        />
+			<Label
+                        id="lbLength"
+                        horizAlign = "left"
+                        />
+			<Label
+                        id="lbDirector"
+                        horizAlign = "left"
+                        />
+			<Label
+                        id="lbRating"
+                        horizAlign = "left"
+                        />
+			<Label
+                        id="lbDescription"
+                        width="1000"
+                        wrap = "true"
+                        />
+			<ButtonGroup layoutDirection="horiz" itemSpacings = "[20]" id="btnGrp"/>
+		</LayoutGroup>
+	</children>
 </component>
