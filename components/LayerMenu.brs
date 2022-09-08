@@ -3,12 +3,14 @@ sub init()
     m.details = m.top.findNode("details")
     m.grid.setFocus(true)
     m.descText = m.top.findNode("lbTopDesc")
+    m.titleText = m.top.findNode("lbTopTitle")
     m.buttonGrp = m.top.findNode("btnGrp")
 
     m.buttongrp.buttons = ["Play", "Close"]
 
     m.grid.observeField("itemSelected", "showDetails")
     m.grid.observeField("itemFocused", "changeTopDescText")
+    m.buttongrp.observeField("buttonSelected", "hideDetails")
 end sub
 
 sub changeTopDescText()
@@ -16,12 +18,14 @@ sub changeTopDescText()
         
         contentChild = m.grid.content.getChild(m.grid.itemFocused)
         m.desctext.text = contentChild.description
+        m.titleText.text = contentChild.title
     end if
 end sub
 
 sub showDetails()
     
     m.buttongrp.setFocus(true)
+    m.buttongrp.focusButton = 0
     contentChild = m.grid.content.getChild(m.grid.itemSelected)
     m.vidurl = contentChild.url
     m.details.findNode("imgPoster").uri = contentChild.FHDPosterURL
@@ -34,6 +38,13 @@ sub showDetails()
     m.details.findNode("lbRating").text = "Parental Rating: " + contentChild.rating
     m.details.findNode("lbDescription").text = "Description: " + contentChild.description
     m.details.visible = true
+end sub
+
+sub hideDetails()
+    if m.buttongrp.buttonSelected = 1 then
+        m.grid.setFocus(true)
+        m.details.visible = false
+    end if
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
