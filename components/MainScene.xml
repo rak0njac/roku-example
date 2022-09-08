@@ -3,7 +3,8 @@
   <script type="text/brightscript" uri="MainScene.brs"/>
 
 	<children>
-    <LayerVideo    
+    <LayerVideo   
+    visible = "false" 
       id="lVideo"
       width="1280"
       height="720"

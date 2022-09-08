@@ -1,25 +1,29 @@
 sub init() 
-    m.grid = m.top.findNode("grid")
+    m.grid = m.top.findNode("lGrid")
+    m.details = m.top.findNode("details")
     m.grid.setFocus(true)
+    m.descText = m.top.findNode("lbTopDesc")
+    m.buttonGrp = m.top.findNode("btnGroup")
+
+    m.buttongrp.buttons = ["Play", "Close"]
 
     m.grid.observeField("itemSelected", "showDetails")
     m.grid.observeField("itemFocused", "changeTopDescText")
 end sub
 
 sub changeTopDescText()
-
     if m.grid.content <> invalid then
-        temp = m.top.findNode("lbTopDesc")
+        
         contentChild = m.grid.content.getChild(m.grid.itemFocused)
-        temp.text = contentChild.description
+        m.desctext.text = contentChild.description
     end if
 end sub
 
 sub showDetails()
-    'm.top.setFocus(false)
-    m.details = m.top.findNode("details")
-    m.details.setFocus(true)
+    
+    m.buttongrp.setFocus(true)
     contentChild = m.grid.content.getChild(m.grid.itemSelected)
+    m.vidurl = contentChild.url
     m.details.findNode("imgPoster").uri = contentChild.FHDPosterURL
     m.details.findNode("lbCast").text = "Cast: " + contentChild.actors.Join(", ")
     m.details.findNode("lbYear").text = "Year: " + contentChild.releasedate
@@ -35,7 +39,7 @@ end sub
 function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false
   
-    if key = "back" and m.details.visible = true then
+    if key = "back" and press then
         m.grid.setFocus(true)
       m.details.visible = false
       handled = true
@@ -43,4 +47,3 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
   
     return handled
 end function
-  
