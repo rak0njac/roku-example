@@ -1,99 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="LayerDetails" extends="Rectangle">
 
-	<children>
-                <Poster
-                        id="imgPoster"
-                        translation="[55,55]"
-                />
+<interface>
+           <field id = "vidurl" type = "uri" /> 
+</interface>
 
+	<children>
+                        <Poster
+                id="imgPoster"
+                translation="[55,55]"
+                />
+        <LayoutGroup translation="[200,55]" itemSpacings = "[20]">
                 <Label
                 id="lbCast"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Cast: "
                 horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,55]" 
                 />
 
                 <Label
                 id="lbYear"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Year: "
                 horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,75]" 
                 />
 
                 <Label
                 id="lbTitle"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Title: "
                 horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,95]" 
                 />
 
                 <Label
                 id="lbGenres"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Genres: "
                 horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,115]" 
                 />
 
                 <Label
                 id="lbLength"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Length: "
                 horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,135]" 
                 />
 
                 <Label
                 id="lbDirector"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Director: "
                 horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,155]" 
                 />
 
                         <Label
                 id="lbRating"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Parental rating: "
                 horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,175]" 
                 />
 
                                         <Label
                 id="lbDescription"
-                height="440"
                 width="1000"
-                font="font:MediumBoldSystemFont"
-                text = "Description: "
-                horizAlign = "left"
-                vertAlign = "center"
-                translation="[200,195]" 
                 wrap = "true"
                 />
+
+                <ButtonGroup layoutDirection="horiz" itemSpacings = "[20]" id="btns"/>
+        </LayoutGroup>
         </children>
 </component>
