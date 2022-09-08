@@ -1,22 +1,16 @@
 sub init() 
-    m.top.setFocus(true)
+    m.grid = m.top.findNode("grid")
+    m.grid.setFocus(true)
 
-    m.top.basePosterSize = [ 150, 229 ]
-    m.top.caption1NumLines = 1
-    m.top.numColumns = 6
-    m.top.numRows = 2
-    m.top.itemSpacing = [ 20, 20 ]
-    m.top.translation = [50, 50]
-
-    m.top.observeField("itemSelected", "showDetails")
-    m.top.observeField("itemFocused", "changeTopDescText")
+    m.grid.observeField("itemSelected", "showDetails")
+    m.grid.observeField("itemFocused", "changeTopDescText")
 end sub
 
 sub changeTopDescText()
 
-    if m.top.content <> invalid then
+    if m.grid.content <> invalid then
         temp = m.top.findNode("lbTopDesc")
-        contentChild = m.top.content.getChild(m.top.itemFocused)
+        contentChild = m.grid.content.getChild(m.grid.itemFocused)
         temp.text = contentChild.description
     end if
 end sub
@@ -25,9 +19,16 @@ sub showDetails()
     'm.top.setFocus(false)
     m.details = m.top.findNode("details")
     m.details.setFocus(true)
-    contentChild = m.top.content.getChild(m.top.itemSelected)
-    description = m.details.findNode("lbDescription")
-    description.text = "Description: " + contentChild.description
+    contentChild = m.grid.content.getChild(m.grid.itemSelected)
+    m.details.findNode("imgPoster").uri = contentChild.FHDPosterURL
+    m.details.findNode("lbCast").text = "Cast: " + contentChild.actors.Join(", ")
+    m.details.findNode("lbYear").text = "Year: " + contentChild.releasedate
+    m.details.findNode("lbTitle").text = "Title: " + contentChild.title
+    m.details.findNode("lbGenres").text = "Genres: " + contentChild.categories.Join(", ")
+    m.details.findNode("lbLength").text = "Length: " + str(contentChild.length)
+    m.details.findNode("lbDirector").text = "Director: " + contentChild.directors.Join(", ")
+    m.details.findNode("lbRating").text = "Parental Rating: " + contentChild.rating
+    m.details.findNode("lbDescription").text = "Description: " + contentChild.description
     m.details.visible = true
 end sub
 
@@ -35,7 +36,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false
   
     if key = "back" and m.details.visible = true then
-        'm.top.setFocus(true)
+        m.grid.setFocus(true)
       m.details.visible = false
       handled = true
     end if

@@ -2,7 +2,10 @@
 <component name="LayerDetails" extends="Rectangle">
 
 	<children>
-                
+                <Poster
+                        id="imgPoster"
+                        translation="[55,55]"
+                />
 
                 <Label
                 id="lbCast"
@@ -12,7 +15,7 @@
                 text = "Cast: "
                 horizAlign = "left"
                 vertAlign = "center"
-                translation="[100,8]" 
+                translation="[200,55]" 
                 />
 
                 <Label
@@ -23,7 +26,7 @@
                 text = "Year: "
                 horizAlign = "left"
                 vertAlign = "center"
-                translation="[100,28]" 
+                translation="[200,75]" 
                 />
 
                 <Label
@@ -34,7 +37,7 @@
                 text = "Title: "
                 horizAlign = "left"
                 vertAlign = "center"
-                translation="[100,48]" 
+                translation="[200,95]" 
                 />
 
                 <Label
@@ -45,7 +48,7 @@
                 text = "Genres: "
                 horizAlign = "left"
                 vertAlign = "center"
-                translation="[100,68]" 
+                translation="[200,115]" 
                 />
 
                 <Label
@@ -56,7 +59,7 @@
                 text = "Length: "
                 horizAlign = "left"
                 vertAlign = "center"
-                translation="[100,88]" 
+                translation="[200,135]" 
                 />
 
                 <Label
@@ -67,18 +70,7 @@
                 text = "Director: "
                 horizAlign = "left"
                 vertAlign = "center"
-                translation="[100,108]" 
-                />
-
-                        <Label
-                id="lbDescription"
-                height="44"
-                width="0"
-                font="font:MediumBoldSystemFont"
-                text = "Description: "
-                horizAlign = "left"
-                vertAlign = "center"
-                translation="[100,128]" 
+                translation="[200,155]" 
                 />
 
                         <Label
@@ -89,7 +81,19 @@
                 text = "Parental rating: "
                 horizAlign = "left"
                 vertAlign = "center"
-                translation="[100,148]" 
+                translation="[200,175]" 
+                />
+
+                                        <Label
+                id="lbDescription"
+                height="440"
+                width="1000"
+                font="font:MediumBoldSystemFont"
+                text = "Description: "
+                horizAlign = "left"
+                vertAlign = "center"
+                translation="[200,195]" 
+                wrap = "true"
                 />
         </children>
 </component>

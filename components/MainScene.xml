@@ -13,12 +13,7 @@
     <LayerMenu 
       visible = "true"
       id = "lMenu" 
-      basePosterSize = "[ 150, 229 ]" 
-      caption1NumLines = "1" 
-      numColumns = "6" 
-      numRows = "2" 
-      itemSpacing = "[ 20, 20 ]" 
-    />
+          />
 
   </children>
 </component>

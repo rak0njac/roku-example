@@ -6,9 +6,9 @@ sub init()
 
   m.video = m.top.findNode("lVideo")
   m.menu = m.top.findNode("lMenu")
+  m.grid = m.menu.findNode("grid")
 end sub
 
 sub fillGlobalContentVar()
-  'm.global.content = m.contentTask.content
-  m.menu.content = m.contentTask.content
+  m.grid.content = m.contentTask.content
 end sub

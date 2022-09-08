@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="LayerMenu" extends="PosterGrid">
+<component name="LayerMenu" extends="Group">
   <script type="text/brightscript" uri="LayerMenu.brs"/>
 
   <children>
+    <PosterGrid
+        id = "grid"
+        basePosterSize = "[ 150, 229 ]"
+        caption1NumLines = "1"
+        numColumns = "6"
+        numRows = "2"
+        itemSpacing = "[ 20, 20 ]"
+        translation = "[50, 50]"
+    />
     <Label
         id="lbTopDesc"
         width = "0"
@@ -15,7 +24,7 @@
         color="0x2B008FF0"
         width="1180"
         height="620"
-        translation="[0,0]"
+        translation="[50,50]"
         />
   </children>
 </component>
