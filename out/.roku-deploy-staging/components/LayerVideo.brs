@@ -6,7 +6,6 @@ sub init()
 end sub
 
 sub playVideo()
-    print "done"
     print m.top.content.url
     m.top.control = "play"
 end sub

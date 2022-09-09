@@ -5,38 +5,35 @@ sub init()
   m.contentTask.observeField("content", "fillGlobalContentVar")
 
   m.video = m.top.findNode("lVideo")
+  m.menu = m.top.findNode("lMenu")
   m.grid = m.top.findNode("lGrid")
 
-  'm.global.setField("video", m.video)
+  m.video.observeField("control", "hideEverything")
+
   m.global.addFields({video : m.video})
-  'm.grid = m.menu.findNode("lGrid")
-  'm.buttongrp = m.menu.findNode("btns")
-  'm.buttongrp.observeField("buttonSelected", "handleButtonPress")
+end sub
+
+sub hideEverything()
+  if m.video.control = "play" then 
+    m.video.setFocus(true)
+    m.menu.visible = false 
+  else 
+    m.menu.visible = true
+  endif
 
 end sub
 
 sub fillGlobalContentVar()
-  m.grid.content = m.contentTask.content
+  m.global.addFields({content : m.contentTask.content})
+  m.grid.content = m.global.content
 end sub
 
+function onKeyEvent(key as String, press as Boolean) as Boolean
+  handled = press
 
-' sub handleButtonPress()
-'   if m.buttongrp.buttonSelected = 0 then
-'       m.details = m.menu.findNode("details")
-'       playVideo(m.details.content)
-'   else
-'       m.grid.setFocus(true)
-'       m.details.visible = false
-'   end if
-' end sub
+  if key = "back" and m.video.state = "playing" and press then
+    m.video.control = "stop"
+  end if
 
-' function playVideo(content as Dynamic)
-'     m.menu.visible = false
-'     m.video.visible = true
-'     'm.video.content = content
-'     videoContent = createObject("RoSGNode", "ContentNode")
-'    videoContent.url = m.details.vidurl
-'     videoContent.title = "Test Video"
-'    videoContent.streamformat = "hls"
-'     m.video.control = "play"
-' end function
+  return handled
+end function

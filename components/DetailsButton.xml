@@ -2,11 +2,11 @@
 
 <!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
 
-<component name = "mybutton" extends = "Button" >
+<component name = "DetailsButton" extends = "Button" >
  
   <interface> 
     <field id = "itemContent" type = "node" onChange = "showcontent"/>
   </interface>
  
-  <script type = "text/brightscript" uri="mybutton.brs"/>
+  <script type = "text/brightscript" uri="DetailsButton.brs"/>
 </component>

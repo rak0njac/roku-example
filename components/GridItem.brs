@@ -19,8 +19,6 @@ end sub
 
 sub showfocus()
   m.itemmask.opacity = 0.75 - (m.top.focusPercent * 0.75)
-  'm.title.scrollspeed = 100
-  'm.genre.scrollspeed = 100
 end sub
 
 sub handlefocus()

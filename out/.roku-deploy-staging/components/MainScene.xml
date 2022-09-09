@@ -14,7 +14,7 @@
     <LayerMenu 
       visible = "true"
       id = "lMenu" 
-          />
+    />
 
   </children>
 </component>

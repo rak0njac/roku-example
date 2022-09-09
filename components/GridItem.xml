@@ -2,7 +2,7 @@
 
 <!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
 
-<component name = "MarkupGridItem" extends = "Group" >
+<component name = "GridItem" extends = "Group" >
  
   <interface> 
     <field id = "itemContent" type = "node" onChange = "showcontent"/>
@@ -10,7 +10,7 @@
     <field id = "itemHasFocus" type = "boolean" onChange = "handlefocus"/> 
   </interface>
  
-  <script type = "text/brightscript" uri="MarkupGridItem.brs"/>
+  <script type = "text/brightscript" uri="GridItem.brs"/>
 
   <children >
   <LayoutGroup>

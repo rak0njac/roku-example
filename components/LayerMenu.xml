@@ -20,7 +20,7 @@
 
     <MarkupGrid
         id = "lGrid"
-        itemcomponentname = "MarkupGridItem"
+        itemcomponentname = "GridItem"
         numColumns = "7"
         numRows = "2"
         itemSize = "[ 150, 300 ]"
