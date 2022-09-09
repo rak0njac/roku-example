@@ -13,10 +13,10 @@
   <script type = "text/brightscript" uri="GridItem.brs"/>
 
   <children >
+
+
   <LayoutGroup>
-      <Label 
-      id = "isFavorite"
-      text = "Favorite"/>
+
 
      <Poster 
       id = "itemPoster" 
@@ -55,6 +55,14 @@
         text = "test1"
         font = "font:SmallestSystemFont" 
     />
+
   </LayoutGroup>
+            <Poster 
+            translation = "[5,5]"
+      id = "isFavorite"
+      width = "40"
+            height = "40"
+            uri = "pkg:/images/Star.png"
+      />
   </children>
 </component>
