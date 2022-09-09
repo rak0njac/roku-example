@@ -1,4 +1,6 @@
 sub init()
+    m.isFavorite = m.top.findNode("isFavorite")
+
     m.itemPoster = m.top.findNode("itemPoster") 
     m.itemMask = m.top.findNode("itemMask")
 
@@ -11,6 +13,7 @@ sub init()
 end sub
 
 sub showcontent()
+  m.isFavorite.visible = m.top.itemContent.isFavorite
   m.itemposter.uri = m.top.itemContent.fhdposterurl
   m.title.text = m.top.itemContent.title
   m.genre.text = m.top.itemContent.categories.join(", ")

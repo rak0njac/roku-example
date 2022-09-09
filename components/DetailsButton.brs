@@ -1,4 +1,5 @@
 sub init()
+  m.top.vertAlign = "center"
 end sub
 
 sub showcontent()

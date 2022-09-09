@@ -50,10 +50,10 @@
 			<MarkupGrid 
                         id = "buttons"
                         itemcomponentname = "DetailsButton"
-                        numColumns = "2"
+                        numColumns = "3"
                         numRows = "1"
-                        itemSize = "[ 400, 50 ]"
-                        itemSpacing = "[ 20, 20 ]"
+                        itemSize = "[ 200, 50 ]"
+                        itemSpacing = "[ 80, 80 ]"
                         />
 		</LayoutGroup>
 	</children>

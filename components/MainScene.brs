@@ -1,4 +1,6 @@
 sub init()
+
+
   m.contentTask = createObject("roSGNode", "ContentReaderTask")
   m.contentTask.contenturi = "https://api.npoint.io/b096a65d709fbe682348"
   m.contentTask.control = "RUN"
@@ -9,8 +11,7 @@ sub init()
   m.grid = m.top.findNode("lGrid")
 
   m.video.observeField("control", "hideEverything")
-
-  m.global.addFields({video : m.video})
+  m.reg = CreateObject("roRegistrySection", "favorite")
 end sub
 
 sub hideEverything()
@@ -24,7 +25,7 @@ sub hideEverything()
 end sub
 
 sub fillGlobalContentVar()
-  m.global.addFields({content : m.contentTask.content})
+  m.global.addFields({video: m.video, content: m.contentTask.content, registry: m.reg})
   m.grid.content = m.global.content
 end sub
 

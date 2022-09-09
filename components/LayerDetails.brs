@@ -3,11 +3,16 @@ sub init()
     m.btngrid.observeField("itemSelected", "handleBtnPress")
 
     m.btncontent = createObject("roSGNode", "ContentNode")
+
+    'for loop maybe
     m.button1content = m.btncontent.createChild("ContentNode")
     m.button2content = m.btncontent.createChild("ContentNode")
+    m.button3content = m.btncontent.createChild("ContentNode")
 
     m.button1content.text = "Play"
     m.button2content.text = "Close"
+    m.button3content.text = "Add to favorites"
+    'end for
 
     m.btngrid.content = m.btncontent
 
@@ -37,7 +42,35 @@ sub handleBtnPress()
     if m.btngrid.itemSelected = 0 then
         video = m.global.video
         video.content = m.top.content
-    else
+    else if m.btngrid.itemSelected = 1 then
         m.top.visible = false
+    else 
+        addFavoriteToRegistry()
     endif
+end sub
+
+sub addFavoriteToRegistry()
+    reg = CreateObject("roRegistrySection", "General")
+    if reg.Exists("Favorites") then
+        favorites = reg.Read("Favorites")
+        favorites = favorites.Split(", ")
+    else
+        favorites = createObject("roArray", 64, true)
+    endif
+
+    favorite = m.top.content.id
+
+    for each entry in favorites
+        if entry = favorite then 
+            print "Favorite already exists"
+            return
+        end if
+    end for
+
+    favorites.Push(favorite)
+    favorites = favorites.Join(", ")
+    reg.Write("Favorites", favorites)
+    reg.Flush()
+
+    print reg.Read("Favorites")
 end sub

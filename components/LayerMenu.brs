@@ -1,4 +1,6 @@
 sub init() 
+
+
     m.grid = m.top.findNode("lGrid")
     m.details = m.top.findNode("details")
 

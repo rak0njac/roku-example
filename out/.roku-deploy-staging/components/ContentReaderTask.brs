@@ -3,6 +3,15 @@ sub init()
 end sub
 
 sub getcontent()
+  reg = CreateObject("roRegistrySection", "General")
+  if reg.Exists("Favorites") then
+      favorites = reg.Read("Favorites")
+      favorites = favorites.Split(", ")
+  else
+      favorites = createObject("roArray", 64, true)
+  endif
+
+
   content = createObject("roSGNode", "ContentNode")
   request = createObject("roUrlTransfer")
   request.SetCertificatesFile("common:/certs/ca-bundle.crt")
@@ -15,6 +24,14 @@ sub getcontent()
       'setup
       itemcontent = content.createChild("ContentNode")
       itemcontent.id = item.id
+      itemcontent.isFavorite = false
+
+      'favorite
+      for each val in favorites
+          if val = item.id
+              itemcontent.isFavorite = true
+          end if
+      end for
 
       'movies
       itemcontent.shortdescriptionline1 = item.Title
