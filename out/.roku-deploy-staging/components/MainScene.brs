@@ -6,6 +6,9 @@ sub init()
 
   m.video = m.top.findNode("lVideo")
   m.grid = m.top.findNode("lGrid")
+
+  'm.global.setField("video", m.video)
+  m.global.addFields({video : m.video})
   'm.grid = m.menu.findNode("lGrid")
   'm.buttongrp = m.menu.findNode("btns")
   'm.buttongrp.observeField("buttonSelected", "handleButtonPress")

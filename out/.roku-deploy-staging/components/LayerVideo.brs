@@ -1,10 +1,12 @@
 sub init()
     m.top.visible = false
-    'videoContent = createObject("RoSGNode", "ContentNode")
-    'videoContent.url = "https://roku.s.cpl.delvenetworks.com/media/59021fabe3b645968e382ac726cd6c7b/60b4a471ffb74809beb2f7d5a15b3193/roku_ep_111_segment_1_final-cc_mix_033015-a7ec8a288c4bcec001c118181c668de321108861.m3u8"
-    'videoContent.title = "Test Video"
-    'videoContent.streamformat = "hls"
 
-    'm.top.content = videoContent
-    'm.top.control = "play"
+    m.top.observeField("content", "playVideo")
+    
+end sub
+
+sub playVideo()
+    print "done"
+    print m.top.content.url
+    m.top.control = "play"
 end sub

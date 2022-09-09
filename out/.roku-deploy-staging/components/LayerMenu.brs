@@ -4,13 +4,32 @@ sub init()
     m.grid.setFocus(true)
     m.descText = m.top.findNode("lbTopDesc")
     m.titleText = m.top.findNode("lbTopTitle")
-    m.buttonGrp = m.top.findNode("btnGrp")
-
-    m.buttongrp.buttons = ["Play", "Close"]
+    m.btngrid = m.details.findNode("buttons")
 
     m.grid.observeField("itemSelected", "showDetails")
     m.grid.observeField("itemFocused", "changeTopDescText")
-    m.buttongrp.observeField("buttonSelected", "hideDetails")
+    m.btngrid.observeField("itemSelected", "handleBtnPress")
+
+    m.btncontent = createObject("roSGNode", "ContentNode")
+    m.button1content = m.btncontent.createChild("ContentNode")
+    m.button2content = m.btncontent.createChild("ContentNode")
+
+    m.button1content.text = "Play"
+    m.button2content.text = "Close"
+
+    m.btngrid.content = m.btncontent
+end sub
+
+sub handleBtnPress()
+    if m.btngrid.itemSelected = 0 then
+        m.top.visible = false
+
+        video = m.global.video
+        video.content = m.contentChild
+    else
+        m.details.visible = false
+        m.grid.setFocus(true)
+    endif
 end sub
 
 sub changeTopDescText()
@@ -23,28 +42,20 @@ sub changeTopDescText()
 end sub
 
 sub showDetails()
-    
-    m.buttongrp.setFocus(true)
-    m.buttongrp.focusButton = 0
-    contentChild = m.grid.content.getChild(m.grid.itemSelected)
-    m.vidurl = contentChild.url
-    m.details.findNode("imgPoster").uri = contentChild.FHDPosterURL
-    m.details.findNode("lbCast").text = "Cast: " + contentChild.actors.Join(", ")
-    m.details.findNode("lbYear").text = "Year: " + contentChild.releasedate
-    m.details.findNode("lbTitle").text = "Title: " + contentChild.title
-    m.details.findNode("lbGenres").text = "Genres: " + contentChild.categories.Join(", ")
-    m.details.findNode("lbLength").text = "Length: " + str(contentChild.length)
-    m.details.findNode("lbDirector").text = "Director: " + contentChild.directors.Join(", ")
-    m.details.findNode("lbRating").text = "Parental Rating: " + contentChild.rating
-    m.details.findNode("lbDescription").text = "Description: " + contentChild.description
+    m.btngrid.setFocus(true)
+    m.contentChild = m.grid.content.getChild(m.grid.itemSelected)
+    m.vidurl = m.contentChild.url
+    m.details.findNode("imgPoster").uri = m.contentChild.FHDPosterURL
+    m.details.findNode("lbCast").text = "Cast: " + m.contentChild.actors.Join(", ")
+    m.details.findNode("lbYear").text = "Year: " + m.contentChild.releasedate
+    m.details.findNode("lbTitle").text = "Title: " + m.contentChild.title
+    m.details.findNode("lbGenres").text = "Genres: " + m.contentChild.categories.Join(", ")
+    m.details.findNode("lbLength").text = "Length: " + str(m.contentChild.length)
+    m.details.findNode("lbDirector").text = "Director: " + m.contentChild.directors.Join(", ")
+    m.details.findNode("lbRating").text = "Parental Rating: " + m.contentChild.rating
+    m.details.findNode("lbDescription").text = "Description: " + m.contentChild.description
     m.details.visible = true
-end sub
 
-sub hideDetails()
-    if m.buttongrp.buttonSelected = 1 then
-        m.grid.setFocus(true)
-        m.details.visible = false
-    end if
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean

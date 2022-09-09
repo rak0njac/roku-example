@@ -40,7 +40,14 @@
                         width="1000"
                         wrap = "true"
                         />
-			<ButtonGroup layoutDirection="horiz" itemSpacings = "[20]" id="btnGrp"/>
+			<MarkupGrid 
+                        id = "buttons"
+                        itemcomponentname = "myButton"
+                        numColumns = "2"
+                        numRows = "1"
+                        itemSize = "[ 400, 50 ]"
+                        itemSpacing = "[ 20, 20 ]"
+                        />
 		</LayoutGroup>
 	</children>
 </component>

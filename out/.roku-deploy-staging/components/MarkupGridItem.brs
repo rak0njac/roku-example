@@ -5,6 +5,9 @@ sub init()
     m.title = m.top.findNode("mgiTitle")
     m.genre = m.top.findNode("mgiGenre")
     m.year = m.top.findNode("mgiYear")
+
+    m.title.scrollspeed = 0
+    m.genre.scrollspeed = 0
 end sub
 
 sub showcontent()
@@ -16,14 +19,20 @@ end sub
 
 sub showfocus()
   m.itemmask.opacity = 0.75 - (m.top.focusPercent * 0.75)
+  'm.title.scrollspeed = 100
+  'm.genre.scrollspeed = 100
 end sub
 
 sub handlefocus()
   if m.top.itemHasFocus = true then
+    m.title.repeatCount = 10
     m.title.scrollspeed = 100
+    m.genre.repeatCount = 10
     m.genre.scrollspeed = 100
   else
+    m.title.repeatCount = 0
     m.title.scrollspeed = 0
+    m.genre.repeatCount = 0
     m.genre.scrollspeed = 0
   endif
 end sub
