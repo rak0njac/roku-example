@@ -1,6 +1,6 @@
 sub init() 
     m.grid = m.top.findNode("lGrid")
-    m.details = m.top.findNode("details")
+    'm.details = m.top.findNode("details")
 
     m.grid.setFocus(true)
     m.descText = m.top.findNode("lbTopDesc")
@@ -8,15 +8,6 @@ sub init()
 
     m.grid.observeField("itemSelected", "showDetails")
     m.grid.observeField("itemFocused", "changeTopDescText")
-    m.details.observeField("visible", "handleFocus")
-    m.top.observeField("visible", "handleFocus")
-end sub
-
-sub handleFocus()
-    if m.details.visible then
-        m.details.setFocus(true)
-    else m.grid.setFocus(true)
-    end if
 end sub
 
 sub changeTopDescText()
@@ -30,18 +21,7 @@ end sub
 
 sub showDetails()
     m.contentChild = m.grid.content.getChild(m.grid.itemSelected)
-    m.details.content = m.contentChild
-    m.details.visible = true
+    m.global.details.content = m.contentChild
+    m.global.details.visible = true
 
 end sub
-
-function onKeyEvent(key as String, press as Boolean) as Boolean
-    handled = press
-  
-    if key = "back" and press then
-        m.grid.setFocus(true)
-      m.details.visible = false
-    end if
-  
-    return handled
-end function

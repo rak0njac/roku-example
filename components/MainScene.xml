@@ -16,5 +16,13 @@
       id = "lMenu" 
     />
 
+  <LayerDetails
+      visible = "false"
+      id="lDetails"
+      color="0x000000F0"
+      width="1280"
+      height="720"
+      translation="[0,0]"
+    />
   </children>
 </component>

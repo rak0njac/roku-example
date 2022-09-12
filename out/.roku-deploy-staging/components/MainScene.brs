@@ -9,26 +9,30 @@ sub init()
   m.video = m.top.findNode("lVideo")
   m.menu = m.top.findNode("lMenu")
   m.grid = m.top.findNode("lGrid")
+  m.details = m.top.findNode("lDetails")
 
-  m.video.observeField("control", "hideEverything")
-  m.reg = CreateObject("roRegistrySection", "favorite")
+  m.video.observeField("state", "handleVideoState")
 end sub
 
-sub hideEverything()
-  if m.video.control = "play" then 
-    m.video.setFocus(true)
-    m.video.visible = true
-    m.menu.visible = false 
-  else 
-    m.menu.setFocus(true)
+sub handleVideoState()
+  m.video.setFocus(true)
+  m.video.visible = true
+  m.menu.visible = false 
+  m.details.visible = false
+
+  if m.video.state = "stopped" or m.video.state = "finished"
+    'm.menu.setFocus(true)
     m.menu.visible = true
     m.video.visible = false
+    m.video.content = invalid
+    m.details.visible = true
+    m.details.setFocus(true)
   endif
 
 end sub
 
 sub fillGlobalContentVar()
-  m.global.addFields({video: m.video, content: m.contentTask.content, registry: m.reg})
+  m.global.addFields({video: m.video, content: m.contentTask.content, details: m.details, grid: m.grid})
   m.grid.content = m.global.content
 end sub
 

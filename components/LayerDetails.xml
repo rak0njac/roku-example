@@ -1,60 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="LayerDetails" extends="Rectangle">
 
-  <script type="text/brightscript" uri="LayerDetails.brs"/>
-
   <interface> 
     <field id = "content" type = "node"/>
   </interface>
 
-	<children>
-		<Poster
-                id="imgPoster"
-                translation="[55,55]"
-                />
+  <script type = "text/brightscript" uri="LayerDetails.brs"/>
 
-		<LayoutGroup translation="[200,55]" itemSpacings = "[20]">
-			<Label
-                        id="lbCast"
-                        horizAlign = "left"
-                        />
-			<Label
-                        id="lbYear"
-                        horizAlign = "left"
-                        />
-			<Label
-                        id="lbTitle"
-                        horizAlign = "left"
-                        />
-			<Label
-                        id="lbGenres"
-                        horizAlign = "left"
-                        />
-			<Label
-                        id="lbLength"
-                        horizAlign = "left"
-                        />
-			<Label
-                        id="lbDirector"
-                        horizAlign = "left"
-                        />
-			<Label
-                        id="lbRating"
-                        horizAlign = "left"
-                        />
-			<Label
-                        id="lbDescription"
-                        width="1000"
-                        wrap = "true"
-                        />
-			<MarkupGrid 
-                        id = "buttons"
-                        itemcomponentname = "DetailsButton"
-                        numColumns = "3"
-                        numRows = "1"
-                        itemSize = "[ 200, 50 ]"
-                        itemSpacing = "[ 80, 80 ]"
-                        />
-		</LayoutGroup>
-	</children>
+	<children>
+    <MaskGroup maskUri="pkg:/images/Untitled.png" maskOffset="[500,0]">
+        <Poster id="bkg" width = "1280" height="370" uri="pkg:/images/trailer.jpg" />
+    </MaskGroup>
+        <LayoutGroup translation="[20,20]" id="upper_info" itemSpacings="[10, 5, 7, 20, 5, 20]">
+            <Label 
+                id="channel_name" 
+                text="My Roku Channel" 
+                >
+                <Font role="font" uri="pkg:/fonts/Montserrat-Black.otf" size="24" />
+            </Label>
+            <Label id="title" text="Deep Impact">
+            </Label>
+            <Label id="general_details" text="1998 | PG-13 | 2h 00m | Adventure | Dramas | Action">
+            </Label>
+            <Label id="description" width="800" text="Troubled people attempt to mend their lives as they brace themselves for a comet that threatens Earth." wrap="true">
+            </Label>
+            <Label id="cast" text="Robert Duvall, Tea Leoni, Elijah Wood">
+            </Label>
+            <Label id="directed_by" text="Directed By: Mimi Leder">
+            </Label>
+            <LayoutGroup id="buttons" layoutDirection="horizontal" itemSpacings="[25]">
+                <Button id="bp" showFocusFootprint="true" focusediconuri="" iconUri="" focusBitmapUri="pkg:/images/btn_bkg.png" focusFootprintBitmapUri="pkg:/images/btn_bkg_unfocused.png"  text = "Play"/>
+                <Button id="bfs" showFocusFootprint="true" focusediconuri="" iconUri="" focusBitmapUri="pkg:/images/btn_bkg.png" focusFootprintBitmapUri="pkg:/images/btn_bkg_unfocused.png"  text = "Go To Full Screen"/>
+            </LayoutGroup>
+        </LayoutGroup>
+
+        <Label translation="[20, 400]" text="Details"/>
+
+        <LayoutGroup translation="[20,450]" id="lower_info" layoutDirection="horiz" itemSpacings="[25]">
+            <Label width="400" id="lower_description" wrap="true" text="Troubled people attempt to mend their lives as they brace themselves for a comet that threatens Earth."/>
+            <LayoutGroup id="lower_details" itemSpacings="[10]">
+                <Label id="lower_cast" width="400" wrap="true" text="Robert Duvall, Tea Leoni, Elijah Wood"/>
+                <Label id="lower_genres"  width="400" wrap="true" text="Adventure, Dramas, Action, Sci-fi"/>
+                <Label id="lower_directors"  width="400" wrap="true" text="Directors: Mimi Leder"/>
+            </LayoutGroup>
+            <Video width="370" height="208"/>
+        </LayoutGroup>
+    </children>
 </component>

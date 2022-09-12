@@ -6,6 +6,8 @@ sub init()
 end sub
 
 sub playVideo()
-    print m.top.content.url
-    m.top.control = "play"
+    if m.top.content <> invalid then
+        print m.top.content.url
+        m.top.control = "play"
+    end if
 end sub

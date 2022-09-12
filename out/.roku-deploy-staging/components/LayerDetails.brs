@@ -1,57 +1,53 @@
 sub init()
-    m.btngrid = m.top.findNode("buttons")
-    m.btngrid.observeField("itemSelected", "handleBtnPress")
-
-    m.btncontent = createObject("roSGNode", "ContentNode")
-
-    'for loop maybe
-    m.button1content = m.btncontent.createChild("ContentNode")
-    m.button2content = m.btncontent.createChild("ContentNode")
-    m.button3content = m.btncontent.createChild("ContentNode")
-
-    m.button1content.text = "Play"
-    m.button2content.text = "Close"
-
-
-    'end for
-
-    m.btngrid.content = m.btncontent
-
     m.top.observeField("focusedChild", "handleFocus")
-    m.top.observeField("content", "showDetails")
+    m.top.observeField("visible", "showDetails")
+
+    m.play = m.top.findNode("bp")
+    m.fs = m.top.findNode("bfs")
+    'm.play.setFocus(true)
+
+    m.play.observeField("buttonSelected", "handleBtnPress")
+    m.fs.observeField("buttonSelected", "handleBtnPress")
+
+    font  = CreateObject("roSGNode", "Font")
+    font.uri = "pkg:/fonts/OpenSans-Bold.ttf"
+    font.size = 24
+
+    titlelabel = m.top.findNode("title")
+    titlelabel.font = font
 endsub
 
 sub showDetails()
-    m.top.findNode("imgPoster").uri = m.top.content.FHDPosterURL
-    m.top.findNode("lbCast").text = "Cast: " + m.top.content.actors.Join(", ")
-    m.top.findNode("lbYear").text = "Year: " + m.top.content.releasedate
-    m.top.findNode("lbTitle").text = "Title: " + m.top.content.title
-    m.top.findNode("lbGenres").text = "Genres: " + m.top.content.categories.Join(", ")
-    m.top.findNode("lbLength").text = "Length: " + str(m.top.content.length)
-    m.top.findNode("lbDirector").text = "Director: " + m.top.content.directors.Join(", ")
-    m.top.findNode("lbRating").text = "Parental Rating: " + m.top.content.rating
-    m.top.findNode("lbDescription").text = "Description: " + m.top.content.description
+    if m.top.visible then
+        m.top.findNode("bkg").uri = m.top.content.FHDPosterURL
+        m.top.findNode("cast").text = m.top.content.actors.Join(", ")
+        m.top.findNode("title").text = m.top.content.title
+        m.top.findNode("directed_by").text = "Directed by: " + m.top.content.directors.Join(", ")
+        m.top.findNode("description").text = m.top.content.description
 
-    if m.top.content.isFavorite then
-        m.button3content.text = "Remove from favorites"
-        else m.button3content.text = "Add to favorites"
+        year = m.top.content.releasedate
+        length = str(m.top.content.length)
+        genres = m.top.content.categories.Join(" | ")
+        rating = m.top.content.rating
+
+        m.top.findNode("general_details").text = year + " | " + rating + " | " + length + " | " + genres
+        m.play.setFocus(true)
     end if
 end sub
 
-sub handleFocus()
-    if m.top.hasFocus() then
-        m.btngrid.setFocus(true)
-    end if
+sub hideDetails()
+    m.global.grid.setFocus(true)
+    m.top.visible = false
 end sub
 
 sub handleBtnPress()
-    if m.btngrid.itemSelected = 0 then
+    if m.play.hasFocus() then
         video = m.global.video
         video.content = m.top.content
-    else if m.btngrid.itemSelected = 1 then
-        m.top.visible = false
+    else if m.fs.hasfocus() then
+        hideDetails()
     else 
-        addFavoriteToRegistry(m.top.content.id)
+        'addFavoriteToRegistry(m.top.content.id)
     endif
 end sub
 
@@ -88,4 +84,33 @@ sub addFavoriteToRegistry(movieId as dynamic)
     reg.Flush()
 
     print reg.Read("Favorites")
+end sub
+
+
+function onKeyEvent(key as String, press as Boolean) as Boolean
+    print key
+    print m.top.visible
+    print press
+
+    if (key = "left" or key = "right") and press then
+        changeButton()
+        return true
+    end if
+
+    if key = "back" and m.top.visible then
+        hideDetails()
+        return true
+    end if
+
+    return false
+end function
+
+sub changeButton()
+    if m.play.hasfocus() then
+        m.play.setFocus(false)
+        m.fs.setFocus(true)
+    else 
+        m.play.setFocus(true)
+        m.fs.setFocus(false)
+    end if
 end sub

@@ -18,23 +18,14 @@
 
 
 
-    <MarkupGrid
-        id = "lGrid"
-        itemcomponentname = "GridItem"
-        numColumns = "7"
-        numRows = "2"
-        itemSize = "[ 150, 300 ]"
-        itemSpacing = "[ 20, 20 ]"
-        translation = "[50, 300]"
-    />
-
-    <LayerDetails
-        visible = "false"
-        id="details"
-        color="0x000000E0"
-        width="1180"
-        height="620"
-        translation="[50,50]"
-        />
+  <MarkupGrid
+      id = "lGrid"
+      itemcomponentname = "GridItem"
+      numColumns = "7"
+      numRows = "2"
+      itemSize = "[ 150, 300 ]"
+      itemSpacing = "[ 20, 20 ]"
+      translation = "[50, 300]"
+  />
   </children>
 </component>
