@@ -11,7 +11,8 @@ sub init()
 
     m.button1content.text = "Play"
     m.button2content.text = "Close"
-    m.button3content.text = "Add to favorites"
+
+
     'end for
 
     m.btngrid.content = m.btncontent
@@ -30,6 +31,11 @@ sub showDetails()
     m.top.findNode("lbDirector").text = "Director: " + m.top.content.directors.Join(", ")
     m.top.findNode("lbRating").text = "Parental Rating: " + m.top.content.rating
     m.top.findNode("lbDescription").text = "Description: " + m.top.content.description
+
+    if m.top.content.isFavorite then
+        m.button3content.text = "Remove from favorites"
+        else m.button3content.text = "Add to favorites"
+    end if
 end sub
 
 sub handleFocus()
@@ -45,29 +51,38 @@ sub handleBtnPress()
     else if m.btngrid.itemSelected = 1 then
         m.top.visible = false
     else 
-        addFavoriteToRegistry()
+        addFavoriteToRegistry(m.top.content.id)
     endif
 end sub
 
-sub addFavoriteToRegistry()
+sub addFavoriteToRegistry(movieId as dynamic)
     reg = CreateObject("roRegistrySection", "General")
+    assocFavorites = createObject("roAssociativeArray")
+
     if reg.Exists("Favorites") then
         favorites = reg.Read("Favorites")
         favorites = favorites.Split(", ")
     else
-        favorites = createObject("roArray", 64, true)
+        favorites = createObject("roArray", 1, false)
     endif
 
-    favorite = m.top.content.id
+    favorite = movieId
 
     for each entry in favorites
-        if entry = favorite then 
-            print "Favorite already exists"
-            return
-        end if
+        assocFavorites[entry] = true
     end for
 
-    favorites.Push(favorite)
+    if m.top.content.isFavorite then
+        m.top.content.isFavorite = false
+        m.button3content.text = "Add to favorites"
+        assocFavorites.delete(favorite)
+    else 
+        m.top.content.isFavorite = true
+        m.button3content.text = "Remove from favorites"
+        assocFavorites[favorite] = true
+    end if
+
+    favorites = assocFavorites.Keys()
     favorites = favorites.Join(", ")
     reg.Write("Favorites", favorites)
     reg.Flush()

@@ -23,7 +23,7 @@
         itemcomponentname = "GridItem"
         numColumns = "7"
         numRows = "2"
-        itemSize = "[ 150, 350 ]"
+        itemSize = "[ 150, 300 ]"
         itemSpacing = "[ 20, 20 ]"
         translation = "[50, 300]"
     />

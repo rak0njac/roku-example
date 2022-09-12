@@ -17,9 +17,12 @@ end sub
 sub hideEverything()
   if m.video.control = "play" then 
     m.video.setFocus(true)
+    m.video.visible = true
     m.menu.visible = false 
   else 
+    m.menu.setFocus(true)
     m.menu.visible = true
+    m.video.visible = false
   endif
 
 end sub
@@ -32,7 +35,7 @@ end sub
 function onKeyEvent(key as String, press as Boolean) as Boolean
   handled = press
 
-  if key = "back" and m.video.state = "playing" and press then
+  if key = "back" and m.video.state = "playing" then
     m.video.control = "stop"
   end if
 

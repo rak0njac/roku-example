@@ -1,6 +1,4 @@
 sub init() 
-
-
     m.grid = m.top.findNode("lGrid")
     m.details = m.top.findNode("details")
 
@@ -11,6 +9,7 @@ sub init()
     m.grid.observeField("itemSelected", "showDetails")
     m.grid.observeField("itemFocused", "changeTopDescText")
     m.details.observeField("visible", "handleFocus")
+    m.top.observeField("visible", "handleFocus")
 end sub
 
 sub handleFocus()

@@ -59,8 +59,8 @@
   </LayoutGroup>
             <Poster 
             translation = "[5,5]"
-      id = "isFavorite"
-      width = "40"
+            id = "isFavorite"
+            width = "40"
             height = "40"
             uri = "pkg:/images/Star.png"
       />

@@ -4,12 +4,18 @@ end sub
 
 sub getcontent()
   reg = CreateObject("roRegistrySection", "General")
+  assocFavorites = CreateObject("roAssociativeArray")
+
   if reg.Exists("Favorites") then
       favorites = reg.Read("Favorites")
       favorites = favorites.Split(", ")
   else
-      favorites = createObject("roArray", 64, true)
+      favorites = createObject("roArray", 1, false)
   endif
+
+  for each entry in favorites
+    assocFavorites[entry] = true
+  end for
 
 
   content = createObject("roSGNode", "ContentNode")
@@ -27,11 +33,7 @@ sub getcontent()
       itemcontent.isFavorite = false
 
       'favorite
-      for each val in favorites
-          if val = item.id
-              itemcontent.isFavorite = true
-          end if
-      end for
+      itemcontent.isFavorite = assocFavorites.doesExist(item.id)
 
       'movies
       itemcontent.shortdescriptionline1 = item.Title
