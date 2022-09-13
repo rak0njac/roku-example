@@ -14,6 +14,7 @@
         
         wrap = "true"
     />
+      <TextEditBox />
   </LayoutGroup>
 
 

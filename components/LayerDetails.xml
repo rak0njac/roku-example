@@ -7,7 +7,6 @@
   </interface>
 
   <script type = "text/brightscript" uri="LayerDetails.brs"/>
-
 	<children>
     <MaskGroup maskUri="pkg:/images/Untitled.png" maskSize="[2400,370]" maskOffset="[500,0]">
         <Poster id="bkg" width = "1280" height="370" uri="pkg:/images/trailer.jpg" />
@@ -17,27 +16,57 @@
                 id="channel_name" 
                 text="My Roku Channel" 
                 >
+                <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="18" />
             </Label>
             <Label id="title" text="Deep Impact">
+                <Font role="font" uri="pkg:/fonts/OpenSans-ExtraBold.ttf" size="36" />
             </Label>
             <MultiStyleLabel id="general_details" text="1998 | PG-13 | 2h 00m | Adventure | Dramas | Action">
             </MultiStyleLabel>
-            <Label id="description" width="640" text="Troubled people attempt to mend their lives as they brace themselves for a comet that threatens Earth." wrap="true">
+            <Label lineSpacing="0" id="description" width="640" height="70" text="Troubled people attempt to mend their lives as they brace themselves for a comet that threatens Earth." wrap="true">
+                <Font role="font" uri="pkg:/fonts/OpenSans-Regular.ttf" size="15" />
             </Label>
             <Label id="cast" text="Robert Duvall, Tea Leoni, Elijah Wood" color="#8A2BE2FF">
+                <Font role="font" uri="pkg:/fonts/OpenSans-Regular.ttf" size="15"/>
             </Label>
             <MultiStyleLabel id="directed_by" text="Directed By: Mimi Leder">
             </MultiStyleLabel>
             <LayoutGroup id="buttons" layoutDirection="horizontal" itemSpacings="[25]">
-                <Button id="bp" Height="61" minWidth="206" maxWidth="206" showFocusFootprint="true" focusediconuri="" iconUri="" focusBitmapUri="pkg:/images/btn_play_focused.png" focusFootprintBitmapUri="pkg:/images/btn_bkg_unfocused.png"/>
-                <Button id="bfs" showFocusFootprint="true" focusediconuri="" iconUri="" focusBitmapUri="pkg:/images/btn_bkg.png" focusFootprintBitmapUri="pkg:/images/btn_bkg_unfocused.png"  text = "Go To Full Screen"/>
+                <Button id="bp" minWidth="200" maxWidth="200" showFocusFootprint="true" focusediconuri="" iconUri="" focusBitmapUri="pkg:/images/btn_bkg.png" focusFootprintBitmapUri="pkg:/images/btn_bkg_unfocused.png">
+                        <LayoutGroup layoutDirection="horiz" itemSpacings="[10]" translation="[50,18]">
+                                <Poster id="icon_bp" width="30" height="30" uri="pkg:/images/icon_play.png" />
+                                <Label id="lb_bp" text="Play">
+                                        <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="18"/>
+                                </Label>
+                        </LayoutGroup>
+                </Button>                
+                <Button id="bfs" minWidth="250" maxWidth="250" showFocusFootprint="true" focusediconuri="" iconUri="" focusBitmapUri="pkg:/images/btn_bkg.png" focusFootprintBitmapUri="pkg:/images/btn_bkg_unfocused.png">
+                        <LayoutGroup layoutDirection="horiz" itemSpacings="[10]" translation="[15,18]">
+                                <Poster width="30" height="30" uri="pkg:/images/icon_fs.png" />
+                                <Label text="Go To Full Screen">
+                                        <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="18"/>
+                                </Label>                        
+                        </LayoutGroup>
+                </Button>
+                <Button id="batf" minWidth="300" maxWidth="300" showFocusFootprint="true" focusediconuri="" iconUri="" focusBitmapUri="pkg:/images/btn_bkg.png" focusFootprintBitmapUri="pkg:/images/btn_bkg_unfocused.png">
+                        <LayoutGroup layoutDirection="horiz" itemSpacings="[10]" translation="[15,18]">
+                                <Poster width="30" height="30" uri="pkg:/images/star_details.png" />
+                                <Label id="lb_batf">
+                                        <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="18"/>
+                                </Label>                        
+                        </LayoutGroup>
+                </Button>
             </LayoutGroup>
         </LayoutGroup>
 
-        <Label translation="[20, 400]" text="DETAILS"/>
+        <Label translation="[20, 400]" text="DETAILS">
+                <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="15"/>
+        </Label>
 
         <LayoutGroup translation="[20,450]" id="lower_info" layoutDirection="horiz" itemSpacings="[25]">
-            <Label width="400" id="lower_description" wrap="true" text="Troubled people attempt to mend their lives as they brace themselves for a comet that threatens Earth."/>
+            <Label height="200" lineSpacing="0" color="#8A8A8AFF" width="400" id="lower_description" wrap="true" text="Troubled people attempt to mend their lives as they brace themselves for a comet that threatens Earth.">
+                <Font role="font" uri="pkg:/fonts/OpenSans-Light.ttf" size="12"/>
+            </Label>
             <LayoutGroup id="lower_details" itemSpacings="[10]">
                 <MultiStyleLabel id="lower_cast" width="400" wrap="true" text="Cast: Robert Duvall, Tea Leoni, Elijah Wood"/>
                 <MultiStyleLabel id="lower_genres"  width="400" wrap="true" text="Genres: Adventure, Dramas, Action, Sci-fi"/>
@@ -45,5 +74,28 @@
             </LayoutGroup>
         </LayoutGroup>
         <Video translation="[850, 450]" id="local_video" width="370" height="208"/>
+
+
+            <Animation id="animation_fly_in"
+       duration="0.2"
+       repeat="false"
+       easeFunction="linear" >
+      <Vector2DFieldInterpolator 
+        id = "myInterp2"
+        key="[0.0, 1.0]"
+        keyValue="[ [-1280, 0.0], [0.0, 0.0] ]"
+        fieldToInterp="lDetails.translation" />
+    </Animation>
+
+                <Animation id="animation_fly_out"
+       duration="0.2"
+       repeat="false"
+       easeFunction="linear" >
+      <Vector2DFieldInterpolator 
+        id = "myInterp2"
+        key="[0.0, 1.0]"
+        keyValue="[ [0, 0.0], [-1280.0, 0.0] ]"
+        fieldToInterp="lDetails.translation" />
+    </Animation>
     </children>
 </component>

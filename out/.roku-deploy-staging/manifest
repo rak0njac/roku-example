@@ -28,4 +28,4 @@ splash_min_time=1
 sdk_instant_resume=1
 run_as_process=1
 
-## ui_resolutions=fhd
+# ui_resolutions=fhd

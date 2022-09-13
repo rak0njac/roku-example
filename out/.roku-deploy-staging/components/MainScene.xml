@@ -22,7 +22,7 @@
       color="0x202020FF"
       width="1280"
       height="720"
-      translation="[0,0]"
+      translation="[-1280,0]"
     />
   </children>
 </component>

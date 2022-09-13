@@ -1,16 +1,24 @@
 sub init()
     m.top.observeField("visible", "showDetails")
+    m.animationIn = m.top.findNode("animation_fly_in")
+    m.animationOut = m.top.findNode("animation_fly_out")
+    m.animationOut.observeField("state", "hideDetails")
 
     m.video = m.top.findNode("local_video")
-    m.video.observeField("content", "playVideo")
+    'm.video.observeField("content", "playVideo")
+    m.video.observeField("state", "changePlayButtonText")
 
     'button logic
     m.play = m.top.findNode("bp")
-    'm.playText = m.top.findNode("bp_label")
+    m.playText = m.top.findNode("lb_bp")
+    m.playIcon = m.top.findNode("icon_bp")
     m.fs = m.top.findNode("bfs")
+    m.fav = m.top.findNode("batf")
+    m.favText = m.top.findNode("lb_batf")
 
     m.play.observeField("buttonSelected", "handleBtnPress")
     m.fs.observeField("buttonSelected", "handleBtnPress")
+    m.fav.observeField("buttonSelected", "handleBtnPress")
 
     'classic labels
     m.img_bkg = m.top.findNode("bkg")
@@ -27,25 +35,56 @@ sub init()
 
     drawingStyles = {
         "purple":{
-            "fontUri": "font:SmallSystemFont"
+            "fontUri": "pkg:/fonts/OpenSans-Regular.ttf"
+            "fontSize" : 15
             "color": "#8A2BE2FF"
         }
         "default":{
-            "fontUri": "font:SmallSystemFont"
-            "color": "#FFFFFFFF"
+            "fontUri": "pkg:/fonts/OpenSans-Regular.ttf"
+            "fontSize" : 15
+            "color": "#8A8A8AFF"
+        }
+    }
+
+    drawingStylesSmall = {
+        "purple":{
+            "fontUri": "pkg:/fonts/OpenSans-Light.ttf"
+            "fontSize" : 12
+            "color": "#8A2BE2FF"
+        }
+        "default":{
+            "fontUri": "pkg:/fonts/OpenSans-Light.ttf"
+            "fontSize" : 12
+            "color": "#8A8A8AFF"
         }
     }
 
     m.lb_general_details.drawingStyles = drawingStyles
     m.lb_directed_by.drawingStyles = drawingStyles
-    m.lb_lower_cast.drawingStyles = drawingStyles
-    m.lb_lower_genres.drawingStyles = drawingStyles
-    m.lb_lower_directors.drawingStyles = drawingStyles
+    m.lb_lower_cast.drawingStyles = drawingStylesSmall
+    m.lb_lower_genres.drawingStyles = drawingStylesSmall
+    m.lb_lower_directors.drawingStyles = drawingStylesSmall
 
 endsub
 
+sub hideDetails()
+    if m.animationOut.state = "stopped" then
+        m.video.content = invalid
+        m.video.control = "stop"
+        m.global.grid.setFocus(true)
+        m.top.visible = false
+    end if
+end sub
+
 sub showDetails()
     if m.top.visible then
+        if m.top.content.isFavorite then
+            m.favText.text = "Remove From Favorites"
+        else
+            m.favText.text = "Add To Favorites"
+        end if
+
+        m.animationIn.control = "start"
         m.img_bkg.uri = m.top.content.HDBackgroundImageURL
         m.lb_cast.text = m.top.content.actors.Join(", ")
         m.lb_title.text = m.top.content.title
@@ -73,17 +112,20 @@ sub handleBackPress()
         m.video.translation = [850, 450]
         m.fs.setFocus(true)
     else
-        m.video.content = invalid
-        m.global.grid.setFocus(true)
-        m.top.visible = false
+        m.animationOut.control = "start"
     end if
 end sub
 
-sub playVideo()
-    if m.video.content <> invalid then
-        print m.video.content.url
-        m.video.control = "play"
-    else m.video.control = "stop"
+sub changePlayButtonText()
+    if m.video.state = "playing" or m.video.state = "buffering"
+        m.playText.text = "Pause"
+        m.playIcon.uri = "pkg:/images/pause.png"
+    else if m.video.state = "finished"
+        m.playText.text = "Replay"
+        m.playIcon.uri = "pkg:/images/replay.png"
+    else 
+        m.playText.text = "Play"
+        m.playIcon.uri = "pkg:/images/icon_play.png"
     end if
 end sub
 
@@ -91,10 +133,13 @@ sub handleBtnPress()
     if m.play.hasFocus() then
         if m.video.state = "paused" then
             m.video.control = "resume"
-        else if m.video.state = "playing" or m.video.state = "buffering"
+        else if m.video.state = "playing"
             m.video.control = "pause"
+        else if m.video.state = "finished"
+            m.video.control = "replay"
         else
             m.video.content = m.top.content
+            m.video.control = "play"
         end if
     else if m.fs.hasfocus() then
         m.top.isVideoFullScreen = true
@@ -103,44 +148,44 @@ sub handleBtnPress()
         m.video.translation = [0,0]
         m.video.setFocus(true)
     else 
-        'addFavoriteToRegistry(m.top.content.id)
+        addFavoriteToRegistry(m.top.content.id)
     endif
 end sub
 
-' sub addFavoriteToRegistry(movieId as dynamic)
-'     reg = CreateObject("roRegistrySection", "General")
-'     assocFavorites = createObject("roAssociativeArray")
+sub addFavoriteToRegistry(movieId as dynamic)
+    reg = CreateObject("roRegistrySection", "General")
+    assocFavorites = createObject("roAssociativeArray")
 
-'     if reg.Exists("Favorites") then
-'         favorites = reg.Read("Favorites")
-'         favorites = favorites.Split(", ")
-'     else
-'         favorites = createObject("roArray", 1, false)
-'     endif
+    if reg.Exists("Favorites") then
+        favorites = reg.Read("Favorites")
+        favorites = favorites.Split(", ")
+    else
+        favorites = createObject("roArray", 1, false)
+    endif
 
-'     favorite = movieId
+    favorite = movieId
 
-'     for each entry in favorites
-'         assocFavorites[entry] = true
-'     end for
+    for each entry in favorites
+        assocFavorites[entry] = true
+    end for
 
-'     if m.top.content.isFavorite then
-'         m.top.content.isFavorite = false
-'         m.button3content.text = "Add to favorites"
-'         assocFavorites.delete(favorite)
-'     else 
-'         m.top.content.isFavorite = true
-'         m.button3content.text = "Remove from favorites"
-'         assocFavorites[favorite] = true
-'     end if
+    if m.top.content.isFavorite then
+        m.top.content.isFavorite = false
+        m.favText.text = "Add To Favorites"
+        assocFavorites.delete(favorite)
+    else 
+        m.top.content.isFavorite = true
+        m.favText.text = "Remove From Favorites"
+        assocFavorites[favorite] = true
+    end if
 
-'     favorites = assocFavorites.Keys()
-'     favorites = favorites.Join(", ")
-'     reg.Write("Favorites", favorites)
-'     reg.Flush()
+    favorites = assocFavorites.Keys()
+    favorites = favorites.Join(", ")
+    reg.Write("Favorites", favorites)
+    reg.Flush()
 
-'     print reg.Read("Favorites")
-' end sub
+    print reg.Read("Favorites")
+end sub
 
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
@@ -149,7 +194,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     print press
 
     if (key = "left" or key = "right") and press then
-        changeButton()
+        changeButton(key)
         return true
     end if
 
@@ -161,12 +206,28 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     return false
 end function
 
-sub changeButton()
-    if m.play.hasfocus() then
-        m.play.setFocus(false)
-        m.fs.setFocus(true)
+sub changeButton(key as String)
+    if key = "left" then
+        if m.play.hasfocus() then
+            m.play.setFocus(false)
+            m.fav.setFocus(true)
+        else if m.fs.hasfocus() then
+            m.fs.setFocus(false)
+            m.play.setFocus(true)
+        else 
+            m.fav.setFocus(false)
+            m.fs.setFocus(true)
+        end if
     else 
-        m.play.setFocus(true)
-        m.fs.setFocus(false)
+        if m.play.hasfocus() then
+            m.play.setFocus(false)
+            m.fs.setFocus(true)
+        else if m.fs.hasfocus() then
+            m.fs.setFocus(false)
+            m.fav.setFocus(true)
+        else 
+            m.fav.setFocus(false)
+            m.play.setFocus(true)
+        end if
     end if
 end sub
