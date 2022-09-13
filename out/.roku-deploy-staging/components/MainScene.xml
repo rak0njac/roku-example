@@ -19,7 +19,7 @@
   <LayerDetails
       visible = "false"
       id="lDetails"
-      color="0x000000F0"
+      color="0x202020FF"
       width="1280"
       height="720"
       translation="[0,0]"
