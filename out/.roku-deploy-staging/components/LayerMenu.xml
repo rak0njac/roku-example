@@ -3,21 +3,6 @@
   <script type="text/brightscript" uri="LayerMenu.brs"/>
 
   <children>
-  <LayoutGroup translation="[50,50]" itemSpacings="[10]">
-    <Label
-        id="lbTopTitle"
-        font = "font:LargeBoldSystemFont"
-    />
-    <Label
-        id="lbTopDesc"
-        width = "1000"
-        
-        wrap = "true"
-    />
-      <TextEditBox />
-  </LayoutGroup>
-
-
 
   <MarkupGrid
       id = "lGrid"
@@ -28,5 +13,19 @@
       itemSpacing = "[ 20, 20 ]"
       translation = "[50, 300]"
   />
+
+    <LayoutGroup translation="[50,50]" itemSpacings="[10]">
+    <Label
+        id="lbTopTitle"
+        font = "font:LargeBoldSystemFont"
+    />
+    <Label
+        id="lbTopDesc"
+        width = "1000"
+        
+        wrap = "true"
+    />
+      <Keyboard visible="false" id="search"/>
+  </LayoutGroup>
   </children>
 </component>

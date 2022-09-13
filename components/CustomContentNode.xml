@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="CustomContentNode" extends="ContentNode">
+    <interface>
+        <field id="isFavorite" type="boolean" />
+        <field id="searchVisible" type="boolean" />
+    </interface>
+</component>

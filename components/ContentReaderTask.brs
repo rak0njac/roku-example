@@ -28,9 +28,10 @@ sub getcontent()
 
     for each item in json.channels
       'setup
-      itemcontent = content.createChild("ContentNode")
+      itemcontent = content.createChild("CustomContentNode")
       itemcontent.id = item.id
       itemcontent.isFavorite = false
+      itemcontent.searchVisible = true
 
       'favorite
       itemcontent.isFavorite = assocFavorites.doesExist(item.id)
