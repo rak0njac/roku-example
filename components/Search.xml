@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="Search" extends="Keyboard">
+<script type="text/brightscript" uri="Search.brs" />
+  <interface>
+    <field id="vertical_clipping_rect" type="float" />
+  </interface>
+</component>

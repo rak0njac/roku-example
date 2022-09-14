@@ -19,5 +19,9 @@
 
     <SplashScreen id="lSplash"/>
 
+    <LayerExitDialog id="lExit" visible="false"/>
+
+    <LayerToastMessage translation="[20,660]" id="lToast" visible="false"/>
+
   </children>
 </component>

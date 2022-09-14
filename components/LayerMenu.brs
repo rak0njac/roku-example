@@ -3,6 +3,8 @@ sub init()
     m.search = m.top.findNode("search")
     m.searchPlaceholder = m.top.findNode("search_placeholder")
     m.noResults = m.top.findNode("no_results")
+    m.KbExpandAnim = m.top.findNode("animation_expand_keyboard")
+    m.KbShrinkAnim = m.top.findNode("animation_shrink_keyboard")
 
     'm.grid.setFocus(true)
     m.descText = m.top.findNode("lbTopDesc")
@@ -77,18 +79,25 @@ end sub
 
 sub showKeyboard(show as boolean)
 if show then
+    m.KbExpandAnim.control = "start"
     m.searchPlaceholder.visible = false
-    m.search.clippingRect = [0.0, 0.0, 1280.0, 720.0]
+    'm.search.clippingRect = [0.0, 0.0, 1280.0, 720.0]
     m.search.setFocus(true)
     m.grid.translation = [50,500]
 else
+    m.KbShrinkAnim.control = "start"
     if m.search.text = "" then
         m.searchPlaceholder.visible = true
     end if
-    m.search.clippingRect = [0.0, 0.0, 1280.0, 60.0]    'show only top 60px of keyboard node so the user can see only the textbox
+    'm.search.clippingRect = [0.0, 0.0, 1280.0, 60.0]    'show only top 60px of keyboard node so the user can see only the textbox
     m.grid.setFocus(true)
     m.grid.translation = [50,300]
 end if
+end sub
+
+sub showExitDialog()
+    m.global.exit.visible = true
+    m.global.exit.setFocus(true)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
@@ -97,8 +106,12 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     if key = "options" and press then
         showKeyboard(true)
         return true
-    else if key = "back" and m.search.visible and press then
-        showKeyboard(false)
+    else if key = "back" and press then
+         if m.search.visible then
+            showKeyboard(false)
+         else
+            showExitDialog()
+         end if
         return true
     end if
     return false

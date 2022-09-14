@@ -10,6 +10,8 @@ sub init()
   m.grid = m.top.findNode("lGrid")
   m.details = m.top.findNode("lDetails")
   m.splash = m.top.findNode("lSplash")
+  m.exit = m.top.findNode("lExit")
+  m.toast = m.top.findNode("lToast")
 
 
   m.splashTimer = CreateObject("roSGNode", "Timer")
@@ -20,7 +22,7 @@ sub init()
 end sub
 
 sub fillGlobalContentVar()
-  m.global.addFields({content: m.contentTask.content, details: m.details, grid: m.grid})
+  m.global.addFields({content: m.contentTask.content, details: m.details, grid: m.grid, exit: m.exit, toast: m.toast})
   m.grid.content = m.global.content
 
   if m.splashTimer = invalid

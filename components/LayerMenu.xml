@@ -29,8 +29,32 @@
   </LayoutGroup>
 <Label id="no_results" visible="false" width = "1280" horizAlign = "center" translation = "[0, 560]"/>
 
-  <Keyboard translation="[30, 200]" visible="false" id="search" clippingRect="[ 0.0, 0.0, 1280.0, 60.0 ]">
+  <Search translation="[30, 200]" visible="false" id="search" clippingRect="[ 0.0, 0.0, 1280.0, 60.0 ]">
       <Label id="search_placeholder" translation="[30,12]" text = "Press * to search..."/>
-  </Keyboard>
+  </Search>
+
+
+  <Animation id="animation_expand_keyboard"
+       duration="0.5"
+       repeat="false"
+       easeFunction="linear" >
+      <FloatFieldInterpolator 
+        id = "myInterp2"
+        key="[0.0, 1.0]"
+        keyValue="[ 60.0 , 720.0 ]"
+        fieldToInterp="search.vertical_clipping_rect" />
+    </Animation>
+
+    
+  <Animation id="animation_shrink_keyboard"
+       duration="0.5"
+       repeat="false"
+       easeFunction="linear" >
+      <FloatFieldInterpolator 
+        id = "myInterp2"
+        key="[0.0, 1.0]"
+        keyValue="[ 720.0 , 60.0  ]"
+        fieldToInterp="search.vertical_clipping_rect" />
+    </Animation>
   </children>
 </component>

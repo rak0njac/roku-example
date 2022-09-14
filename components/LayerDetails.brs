@@ -189,10 +189,14 @@ sub addFavoriteToRegistry(movieId as dynamic)
 
     if m.top.content.isFavorite then
         m.top.content.isFavorite = false
+        m.global.toast.visible = true
+        m.global.toast.text = "Removed " + m.top.content.title + " from favorites."
         m.favBtnText.text = "Add To Favorites"
         assocFavorites.delete(favorite)
     else 
         m.top.content.isFavorite = true
+        m.global.toast.visible = true
+        m.global.toast.text = "Added " + m.top.content.title + " to favorites."
         m.favBtnText.text = "Remove From Favorites"
         assocFavorites[favorite] = true
     end if

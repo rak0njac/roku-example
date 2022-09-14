@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="LayerExitDialog" extends="StandardDialog">
+  <script type = "text/brightscript" uri="LayerExitDialog.brs"/>
+    <children>
+    <StdDlgTitleArea primaryTitle="Exit My Roku Channel" />
+    <StdDlgContentArea >
+        <StdDlgTextItem id="kbItem" text="Are you sure you want to exit My Roku Channel?" />
+    </StdDlgContentArea>
+    <StdDlgButtonArea id="buttonArea" >
+        <StdDlgButton text="Yes" />
+        <StdDlgButton text="No" />
+    </StdDlgButtonArea>
+    </children>
+</component>

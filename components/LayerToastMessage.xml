@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name = "LayerToastMessage" extends = "Group" >
+  <script type="text/brightscript" uri="LayerToastMessage.brs"/>
+
+<interface>
+    <field id = "text" type = "string" />
+</interface>
+
+    <children>
+        <Rectangle width = "1240" height = "40" color = "0x00000088"/>
+        <Label id="label" translation = "[10,10]" text = "Success displaying toast message"/>
+    </children>
+</component>
