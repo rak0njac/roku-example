@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="SplashScreen" extends="Group">
+  <script type="text/brightscript" uri="SplashScreen.brs"/>
+
+  <children>
+  <Rectangle width="1280" height="720" color="0x000000FF"/>
+
+    <Label id="splash_text" width="1280" translation="[0, 260]" horizAlign="center" color="0xFFFF00FF">
+        <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="48" />
+    </Label>
+
+    <Poster width = "50" height = "50" translation="[465,500]" id="splash_circle_1" uri="pkg:/images/splash_asset.png" blendColor="0xFFFF00FF"/>
+    <Poster width = "50" height = "50" translation="[565,500]" id="splash_circle_2" uri="pkg:/images/splash_asset.png" blendColor="0xFF0000FF"/>
+    <Poster width = "50" height = "50" translation="[665,500]" id="splash_circle_3" uri="pkg:/images/splash_asset.png" blendColor="0x00FFFFFF"/>
+    <Poster width = "50" height = "50" translation="[765,500]" id="splash_circle_4" uri="pkg:/images/splash_asset.png" blendColor="0xFF00FFFF"/>
+
+<ParallelAnimation id="anim" repeat="true">
+        <Animation id="anim_c1"
+            duration="2"
+            easeFunction="linear" >
+            <Vector2DFieldInterpolator id = "interp_c1"
+            key="[0.0, 0.25, 0.5, 0.75, 1.0]"
+            keyValue="[[0.66, 0.66], [0.796, 0.796], [1.0, 1.0], [0.796, 0.796], [0.66, 0.66]]"
+            fieldToInterp="splash_circle_1.scale" />
+        </Animation>
+        <Animation id="anim_c2"
+            duration="2"
+            easeFunction="linear" >
+            <Vector2DFieldInterpolator id = "interp_c1"
+            key="[0.0, 0.25, 0.5, 0.75, 1.0]"
+            keyValue="[[0.796, 0.796], [1.0, 1.0], [0.796, 0.796], [0.66, 0.66], [0.796, 0.796]]"
+            fieldToInterp="splash_circle_2.scale" />
+        </Animation>
+        <Animation id="anim_c3"
+            duration="2"
+            easeFunction="linear" >
+            <Vector2DFieldInterpolator id = "interp_c1"
+            key="[0.0, 0.25, 0.5, 0.75, 1.0]"
+            keyValue="[ [1.0, 1.0], [0.796, 0.796], [0.66, 0.66], [0.796, 0.796], [1.0, 1.0]]"
+            fieldToInterp="splash_circle_3.scale" />
+                    </Animation>
+        <Animation id="anim_c4"
+            duration="2"
+            easeFunction="linear" >
+            <Vector2DFieldInterpolator id = "interp_c1"
+            key="[0.0, 0.25, 0.5, 0.75, 1.0]"
+            keyValue="[[0.796, 0.796], [0.66, 0.66], [0.796, 0.796], [1.0, 1.0], [0.796, 0.796]]"
+            fieldToInterp="splash_circle_4.scale" />
+                    </Animation>
+        </ParallelAnimation>
+  </children>
+</component>

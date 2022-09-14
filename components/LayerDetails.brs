@@ -1,24 +1,26 @@
 sub init()
     m.top.observeField("visible", "showDetails")
+
+    'animation logic
     m.animationIn = m.top.findNode("animation_fly_in")
     m.animationOut = m.top.findNode("animation_fly_out")
     m.animationOut.observeField("state", "hideDetails")
 
+    'video logic
     m.video = m.top.findNode("local_video")
-    'm.video.observeField("content", "playVideo")
-    m.video.observeField("state", "changePlayButtonText")
+    m.video.observeField("state", "changeplayButtonText")
 
     'button logic
-    m.play = m.top.findNode("bp")
-    m.playText = m.top.findNode("lb_bp")
-    m.playIcon = m.top.findNode("icon_bp")
-    m.fs = m.top.findNode("bfs")
-    m.fav = m.top.findNode("batf")
-    m.favText = m.top.findNode("lb_batf")
+    m.playBtn = m.top.findNode("bp")
+    m.playBtnText = m.top.findNode("lb_bp")
+    m.playBtnIcon = m.top.findNode("icon_bp")
+    m.fsBtn = m.top.findNode("bfs")
+    m.favBtn = m.top.findNode("batf")
+    m.favBtnText = m.top.findNode("lb_batf")
 
-    m.play.observeField("buttonSelected", "handleBtnPress")
-    m.fs.observeField("buttonSelected", "handleBtnPress")
-    m.fav.observeField("buttonSelected", "handleBtnPress")
+    m.playBtn.observeField("buttonSelected", "handleBtnPress")
+    m.fsBtn.observeField("buttonSelected", "handleBtnPress")
+    m.favBtn.observeField("buttonSelected", "handleBtnPress")
 
     'classic labels
     m.img_bkg = m.top.findNode("bkg")
@@ -79,12 +81,11 @@ end sub
 sub showDetails()
     if m.top.visible then
         if m.top.content.isFavorite then
-            m.favText.text = "Remove From Favorites"
+            m.favBtnText.text = "Remove From Favorites"
         else
-            m.favText.text = "Add To Favorites"
+            m.favBtnText.text = "Add To Favorites"
         end if
 
-        m.animationIn.control = "start"
         m.img_bkg.uri = m.top.content.HDBackgroundImageURL
         m.lb_cast.text = m.top.content.actors.Join(", ")
         m.lb_title.text = m.top.content.title
@@ -100,7 +101,9 @@ sub showDetails()
         m.lb_lower_cast.text = "Cast: <purple>" + m.top.content.actors.Join(", ") + "</purple>"
         m.lb_lower_genres.text = "Genres: <purple>" + m.top.content.categories.Join(", ") + "</purple>"
         m.lb_lower_directors.text = "Directors: <purple>" + m.top.content.directors.Join(", ") + "</purple>"
-        m.play.setFocus(true)
+        m.playBtn.setFocus(true)
+
+        m.animationIn.control = "start"
     end if
 end sub
 
@@ -110,43 +113,58 @@ sub handleBackPress()
         m.video.width = 370
         m.video.height = 208
         m.video.translation = [850, 450]
-        m.fs.setFocus(true)
+        m.fsBtn.setFocus(true)
     else
         m.animationOut.control = "start"
     end if
 end sub
 
-sub changePlayButtonText()
+sub changeplayButtonText()
     if m.video.state = "playing" or m.video.state = "buffering"
-        m.playText.text = "Pause"
-        m.playIcon.uri = "pkg:/images/pause.png"
+        m.playBtnText.text = "Pause"
+        m.playBtnIcon.uri = "pkg:/images/pause.png"
     else if m.video.state = "finished"
-        m.playText.text = "Replay"
-        m.playIcon.uri = "pkg:/images/replay.png"
+        m.playBtnText.text = "Replay"
+        m.playBtnIcon.uri = "pkg:/images/replay.png"
     else 
-        m.playText.text = "Play"
-        m.playIcon.uri = "pkg:/images/icon_play.png"
+        m.playBtnText.text = "Play"
+        m.playBtnIcon.uri = "pkg:/images/icon_play.png"
     end if
 end sub
 
+sub assignVideoContent(content as dynamic)   'prevents video playback from stopping when adding/removing movie from favorites
+    newContent = CreateObject("RoSGNode", "CustomContentNode")
+    newContent.url = content.url
+    newContent.streamformat = content.streamformat
+    m.video.content = newContent
+end sub
+
 sub handleBtnPress()
-    if m.play.hasFocus() then
+    'mb change hasFocus() to buttonSelected but it works...
+    'playBtn button
+    if m.playBtn.hasFocus() then
         if m.video.state = "paused" then
             m.video.control = "resume"
         else if m.video.state = "playing"
             m.video.control = "pause"
         else if m.video.state = "finished"
+            m.video.seek = 0
             m.video.control = "replay"
         else
-            m.video.content = m.top.content
+            'm.video.content = m.top.content
+            assignVideoContent(m.top.content)
             m.video.control = "play"
         end if
-    else if m.fs.hasfocus() then
+
+    'go to full screen button
+    else if m.fsBtn.hasfocus() then
         m.top.isVideoFullScreen = true
         m.video.width = 1280
         m.video.height = 720
         m.video.translation = [0,0]
         m.video.setFocus(true)
+
+    'favorites button
     else 
         addFavoriteToRegistry(m.top.content.id)
     endif
@@ -171,11 +189,11 @@ sub addFavoriteToRegistry(movieId as dynamic)
 
     if m.top.content.isFavorite then
         m.top.content.isFavorite = false
-        m.favText.text = "Add To Favorites"
+        m.favBtnText.text = "Add To Favorites"
         assocFavorites.delete(favorite)
     else 
         m.top.content.isFavorite = true
-        m.favText.text = "Remove From Favorites"
+        m.favBtnText.text = "Remove From Favorites"
         assocFavorites[favorite] = true
     end if
 
@@ -189,10 +207,6 @@ end sub
 
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
-    print key
-    print m.top.visible
-    print press
-
     if (key = "left" or key = "right") and press then
         changeButton(key)
         return true
@@ -207,27 +221,28 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
 end function
 
 sub changeButton(key as String)
+    'TODO figure out non-brute-force way
     if key = "left" then
-        if m.play.hasfocus() then
-            m.play.setFocus(false)
-            m.fav.setFocus(true)
-        else if m.fs.hasfocus() then
-            m.fs.setFocus(false)
-            m.play.setFocus(true)
+        if m.playBtn.hasfocus() then
+            m.playBtn.setFocus(false)
+            m.favBtn.setFocus(true)
+        else if m.fsBtn.hasfocus() then
+            m.fsBtn.setFocus(false)
+            m.playBtn.setFocus(true)
         else 
-            m.fav.setFocus(false)
-            m.fs.setFocus(true)
+            m.favBtn.setFocus(false)
+            m.fsBtn.setFocus(true)
         end if
     else 
-        if m.play.hasfocus() then
-            m.play.setFocus(false)
-            m.fs.setFocus(true)
-        else if m.fs.hasfocus() then
-            m.fs.setFocus(false)
-            m.fav.setFocus(true)
+        if m.playBtn.hasfocus() then
+            m.playBtn.setFocus(false)
+            m.fsBtn.setFocus(true)
+        else if m.fsBtn.hasfocus() then
+            m.fsBtn.setFocus(false)
+            m.favBtn.setFocus(true)
         else 
-            m.fav.setFocus(false)
-            m.play.setFocus(true)
+            m.favBtn.setFocus(false)
+            m.playBtn.setFocus(true)
         end if
     end if
 end sub

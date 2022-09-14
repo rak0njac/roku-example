@@ -13,8 +13,6 @@ sub init()
 end sub
 
 sub showcontent()
-  m.top.visible = m.top.itemContent.searchVisible
-
   m.isFavorite.visible = m.top.itemContent.isFavorite
   m.itemposter.uri = m.top.itemContent.fhdposterurl
   m.title.text = m.top.itemContent.title

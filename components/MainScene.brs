@@ -1,47 +1,42 @@
 sub init()
-
+  m.top.setFocus(true)
 
   m.contentTask = createObject("roSGNode", "ContentReaderTask")
   m.contentTask.contenturi = "https://api.npoint.io/b096a65d709fbe682348"
   m.contentTask.control = "RUN"
   m.contentTask.observeField("content", "fillGlobalContentVar")
 
-  m.video = m.top.findNode("lVideo")
   m.menu = m.top.findNode("lMenu")
   m.grid = m.top.findNode("lGrid")
   m.details = m.top.findNode("lDetails")
+  m.splash = m.top.findNode("lSplash")
 
-  m.video.observeField("state", "handleVideoState")
-end sub
 
-sub handleVideoState()
-  m.video.setFocus(true)
-  m.video.visible = true
-  m.menu.visible = false 
-  m.details.visible = false
-
-  if m.video.state = "stopped" or m.video.state = "finished"
-    'm.menu.setFocus(true)
-    m.menu.visible = true
-    m.video.visible = false
-    m.video.content = invalid
-    m.details.visible = true
-    m.details.setFocus(true)
-  endif
-
+  m.splashTimer = CreateObject("roSGNode", "Timer")
+  m.splashTimer.duration = 3
+  m.splashTimer.repeat = false
+  m.splashTimer.observeField("fire", "splashTimerFired")
+  m.splashTimer.control = "start"
 end sub
 
 sub fillGlobalContentVar()
-  m.global.addFields({video: m.video, content: m.contentTask.content, details: m.details, grid: m.grid})
+  m.global.addFields({content: m.contentTask.content, details: m.details, grid: m.grid})
   m.grid.content = m.global.content
+
+  if m.splashTimer = invalid
+    hideSplash()
+  end if
 end sub
 
-function onKeyEvent(key as String, press as Boolean) as Boolean
-  handled = press
 
-  if key = "back" and m.video.state = "playing" then
-    m.video.control = "stop"
+sub splashTimerFired()
+  if m.global.content <> invalid
+    hideSplash()
   end if
+  m.splashTimer = invalid
+end sub
 
-  return handled
-end function
+sub hideSplash()
+  m.grid.setFocus(true)
+  m.splash.visible = false
+end sub

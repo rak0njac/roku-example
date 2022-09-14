@@ -18,7 +18,7 @@ sub getcontent()
   end for
 
 
-  content = createObject("roSGNode", "ContentNode")
+  content = createObject("roSGNode", "CustomContentNode")
   request = createObject("roUrlTransfer")
   request.SetCertificatesFile("common:/certs/ca-bundle.crt")
   request.InitClientCertificates()
@@ -30,8 +30,6 @@ sub getcontent()
       'setup
       itemcontent = content.createChild("CustomContentNode")
       itemcontent.id = item.id
-      itemcontent.isFavorite = false
-      itemcontent.searchVisible = true
 
       'favorite
       itemcontent.isFavorite = assocFavorites.doesExist(item.id)

@@ -22,10 +22,15 @@
     <Label
         id="lbTopDesc"
         width = "1000"
-        
+        height = "400"
         wrap = "true"
     />
-      <Keyboard visible="false" id="search"/>
+      
   </LayoutGroup>
+<Label id="no_results" visible="false" width = "1280" horizAlign = "center" translation = "[0, 560]"/>
+
+  <Keyboard translation="[30, 200]" visible="false" id="search" clippingRect="[ 0.0, 0.0, 1280.0, 60.0 ]">
+      <Label id="search_placeholder" translation="[30,12]" text = "Press * to search..."/>
+  </Keyboard>
   </children>
 </component>

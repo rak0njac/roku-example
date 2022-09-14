@@ -3,14 +3,6 @@
   <script type="text/brightscript" uri="MainScene.brs"/>
 
 	<children>
-    <LayerVideo   
-    visible = "false" 
-      id="lVideo"
-      width="1280"
-      height="720"
-      translation="[0,0]"
-    />
-
     <LayerMenu 
       visible = "true"
       id = "lMenu" 
@@ -24,5 +16,8 @@
       height="720"
       translation="[-1280,0]"
     />
+
+    <SplashScreen id="lSplash"/>
+
   </children>
 </component>
