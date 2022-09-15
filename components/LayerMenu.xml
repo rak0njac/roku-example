@@ -3,16 +3,20 @@
   <script type="text/brightscript" uri="LayerMenu.brs"/>
 
   <children>
+    <RowList 
+      id = "lGrid" 
+      translation = "[ 50, 260 ]" 
+      itemComponentName = "RowListItem" 
+      numRows = "4" 
+      itemSize = "[ 1608, 350 ]" 
+      rowItemSize = "[ [150, 300] ]" 
+      itemSpacing = "[ 0, 40 ]" 
+      rowItemSpacing = "[[50, 0]]"
+      showRowLabel = "[ true ]" 
+      drawFocusFeedback = "false" 
+      vertFocusAnimationStyle = "fixedFocusWrap" 
+      rowFocusAnimationStyle = "fixedFocusWrap" />
 
-  <MarkupGrid
-      id = "lGrid"
-      itemcomponentname = "GridItem"
-      numColumns = "7"
-      numRows = "2"
-      itemSize = "[ 150, 300 ]"
-      itemSpacing = "[ 20, 20 ]"
-      translation = "[50, 300]"
-  />
 
     <LayoutGroup translation="[50,50]" itemSpacings="[10]">
     <Label
@@ -44,7 +48,7 @@
         fieldToInterp="search.vertical_clipping_rect" />
       <Vector2DFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ [50, 300] , [50, 500]]"
+        keyValue="[ [50, 260] , [50, 500]]"
         fieldToInterp="lGrid.translation" />
     </Animation>
 
@@ -59,7 +63,7 @@
         fieldToInterp="search.vertical_clipping_rect" />
       <Vector2DFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ [50, 500] , [50, 300]]"
+        keyValue="[ [50, 500] , [50, 260]]"
         fieldToInterp="lGrid.translation" />
     </Animation>
   </children>

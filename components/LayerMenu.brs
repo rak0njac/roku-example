@@ -10,8 +10,8 @@ sub init()
     m.descText = m.top.findNode("lbTopDesc")
     m.titleText = m.top.findNode("lbTopTitle")
 
-    m.grid.observeField("itemSelected", "showDetails")
-    m.grid.observeField("itemFocused", "changeTopDescText")
+    m.grid.observeField("rowItemSelected", "showDetails")
+    m.grid.observeField("rowItemFocused", "changeTopDescText")
     m.search.observeField("text", "search")
     m.grid.observeField("content", "handleContentChange")
 end sub
@@ -35,46 +35,50 @@ end sub
 sub search()
         newContent = createObject("roSGNode", "CustomContentNode")
         for i = 0 to m.global.content.getChildCount() - 1
-            child = m.global.content.getChild(i)
-                if not lCase(child.title).InStr(lCase(m.search.text)) then
-
+            rowChild = m.global.content.getChild(i)
+            newRowChild = newContent.createChild("CustomContentNode")
+            newRowChild.title = rowChild.title
+            for j = 0 to rowChild.getChildCount() - 1
+                movieChild = rowChild.getChild(j)
+                if not lCase(movieChild.title).InStr(lCase(m.search.text)) then
                     'copy everything manually since there are no deep copy constructors in brs.. let me know if there's a better way
-                    itemcontent = newContent.createChild("CustomContentNode")
-                    itemcontent.id = child.id
-                    itemcontent.isFavorite = child.isFavorite
-                    itemcontent.shortdescriptionline1 = child.shortdescriptionline1
-                    itemcontent.shortdescriptionline2 = child.shortdescriptionline2
-                    itemcontent.FHDPosterURL = child.FHDPosterURL
-                    itemcontent.actors = child.actors
-                    itemcontent.releasedate = child.releasedate
-                    itemcontent.title = child.title
-                    itemcontent.categories = child.categories
-                    itemcontent.length = child.length
-                    itemcontent.directors = child.directors
-                    itemcontent.Description = child.Description
-                    itemcontent.rating = child.rating
-                    itemcontent.HDBackgroundImageUrl = child.HDBackgroundImageUrl
-                    itemcontent.url = child.url
-                    itemcontent.streamformat = child.streamformat
+                    newMovieChild = newRowChild.createChild("CustomContentNode")
+                    newMovieChild.id = movieChild.id
+                    newMovieChild.isFavorite = movieChild.isFavorite
+                    newMovieChild.shortdescriptionline1 = movieChild.shortdescriptionline1
+                    newMovieChild.shortdescriptionline2 = movieChild.shortdescriptionline2
+                    newMovieChild.FHDPosterURL = movieChild.FHDPosterURL
+                    newMovieChild.actors = movieChild.actors
+                    newMovieChild.releasedate = movieChild.releasedate
+                    newMovieChild.title = movieChild.title
+                    newMovieChild.categories = movieChild.categories
+                    newMovieChild.length = movieChild.length
+                    newMovieChild.directors = movieChild.directors
+                    newMovieChild.Description = movieChild.Description
+                    newMovieChild.rating = movieChild.rating
+                    newMovieChild.HDBackgroundImageUrl = movieChild.HDBackgroundImageUrl
+                    newMovieChild.url = movieChild.url
+                    newMovieChild.streamformat = movieChild.streamformat
                 end if
+            end for
         end for
         m.grid.content = newContent
 end sub
 
 sub changeTopDescText()
-    if m.grid.content.getChildCount() > 0 then
-        
-        contentChild = m.grid.content.getChild(m.grid.itemFocused)
-        m.desctext.text = contentChild.description
-        m.titleText.text = contentChild.title
-    end if
+    row = m.grid.rowItemFocused.getEntry(0)
+    movie = m.grid.rowItemFocused.getEntry(1)
+    contentChild = m.grid.content.getChild(row).getChild(movie)
+    m.desctext.text = contentChild.description
+    m.titleText.text = contentChild.title
 end sub
 
 sub showDetails()
-    print "showDetails() called..."
-        m.contentChild = m.grid.content.getChild(m.grid.itemSelected)
-        m.global.details.content = m.contentChild
-        m.global.details.visible = true
+    row = m.grid.rowItemSelected.getEntry(0)
+    movie = m.grid.rowItemSelected.getEntry(1)
+    m.contentChild = m.grid.content.getChild(row).getChild(movie)
+    m.global.details.content = m.contentChild
+    m.global.details.visible = true
 end sub
 
 sub showKeyboard(show as boolean)

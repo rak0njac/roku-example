@@ -1,0 +1,59 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+ 
+<component name = "RowListItem" extends = "Group" >
+ 
+  <interface > 
+    <field id = "itemContent" type = "node" onChange = "showcontent"/>
+    <field id = "focusPercent" type = "float" onChange = "showfocus"/> 
+    <field id = "rowFocusPercent" type = "float" onChange = "showrowfocus"/>
+    <field id = "itemHasFocus" type = "boolean" onChange = "handlefocus"/> 
+  </interface>
+ 
+  <script type = "text/brightscript" uri="RowListItem.brs" />
+
+  <children>
+      <Poster 
+        id = "itemPoster" 
+        width = "150" 
+        height = "229" 
+        scaleRotateCenter = "[ 75.0, 114.5 ]" />
+
+      <Rectangle 
+        id = "itemMask" 
+        color = "0x000000FF" 
+        opacity = "0.75" 
+        width = "150" 
+        height = "229" 
+        scaleRotateCenter = "[ 75.0, 114.5 ]" />
+
+      <ScrollingLabel
+          id = "mgiTitle"
+          text = "test1"
+          maxWidth = "150" 
+          font = "font:MediumBoldSystemFont" 
+          translation = "[0, 240]"/>
+
+      <ScrollingLabel
+          id = "mgiYear"
+          maxWidth = "150" 
+          text = "test1"
+          font = "font:SmallestSystemFont" 
+          translation = "[0, 270]"/>
+
+      <ScrollingLabel
+          id = "mgiGenre"
+          maxWidth = "150" 
+          text = "test1"
+          font = "font:SmallestSystemFont"
+          translation = "[0, 290]" />
+
+    <Poster 
+    translation = "[5,5]"
+    id = "isFavorite"
+    width = "40"
+    height = "40"
+    uri = "pkg:/images/Star.png"/>
+  </children>
+</component>

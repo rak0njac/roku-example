@@ -3,5 +3,6 @@
 
   <interface>
     <field id = "isFavorite" type = "boolean" />
+    <field id = "categoryId" type = "integer" />
   </interface>
 </component>

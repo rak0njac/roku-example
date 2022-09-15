@@ -1,7 +1,7 @@
 sub init()
   m.top.setFocus(true)
 
-  m.contentTask = createObject("roSGNode", "ContentReaderTask")
+  m.contentTask = createObject("roSGNode", "NewContentReaderTask")
   m.contentTask.contenturi = "https://api.npoint.io/b096a65d709fbe682348"
   m.contentTask.control = "RUN"
   m.contentTask.observeField("content", "fillGlobalContentVar")

@@ -1,15 +1,15 @@
 sub init()
-    m.isFavorite = m.top.findNode("isFavorite")
+  m.isFavorite = m.top.findNode("isFavorite")
 
-    m.itemPoster = m.top.findNode("itemPoster") 
-    m.itemMask = m.top.findNode("itemMask")
+  m.itemposter = m.top.findNode("itemPoster") 
+  m.itemmask = m.top.findNode("itemMask")
 
-    m.title = m.top.findNode("mgiTitle")
-    m.genre = m.top.findNode("mgiGenre")
-    m.year = m.top.findNode("mgiYear")
+  m.title = m.top.findNode("mgiTitle")
+  m.genre = m.top.findNode("mgiGenre")
+  m.year = m.top.findNode("mgiYear")
 
-    m.title.scrollspeed = 0
-    m.genre.scrollspeed = 0
+  m.title.scrollspeed = 0
+  m.genre.scrollspeed = 0
 end sub
 
 sub showcontent()
@@ -21,7 +21,12 @@ sub showcontent()
 end sub
 
 sub showfocus()
-  m.itemmask.opacity = 0.75 - (m.top.focusPercent * 0.75)
+  scale = 1 + (m.top.focusPercent * 0.08)
+  m.itemposter.scale = [scale, scale]
+end sub
+sub showrowfocus()
+  m.itemmask.opacity = 0.75 - (m.top.rowFocusPercent * 0.75)
+  'm.itemlabel.opacity = m.top.rowFocusPercent
 end sub
 
 sub handlefocus()
