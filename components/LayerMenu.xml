@@ -35,26 +35,32 @@
 
 
   <Animation id="animation_expand_keyboard"
-       duration="0.5"
+       duration="0.25"
        repeat="false"
        easeFunction="linear" >
       <FloatFieldInterpolator 
-        id = "myInterp2"
         key="[0.0, 1.0]"
-        keyValue="[ 60.0 , 720.0 ]"
+        keyValue="[ 60.0 , 303.0 ]"
         fieldToInterp="search.vertical_clipping_rect" />
+      <Vector2DFieldInterpolator 
+        key="[0.0, 1.0]"
+        keyValue="[ [50, 300] , [50, 500]]"
+        fieldToInterp="lGrid.translation" />
     </Animation>
 
     
   <Animation id="animation_shrink_keyboard"
-       duration="0.5"
+       duration="0.25"
        repeat="false"
        easeFunction="linear" >
       <FloatFieldInterpolator 
-        id = "myInterp2"
         key="[0.0, 1.0]"
-        keyValue="[ 720.0 , 60.0  ]"
+        keyValue="[ 303.0 , 60.0  ]"
         fieldToInterp="search.vertical_clipping_rect" />
+      <Vector2DFieldInterpolator 
+        key="[0.0, 1.0]"
+        keyValue="[ [50, 500] , [50, 300]]"
+        fieldToInterp="lGrid.translation" />
     </Animation>
   </children>
 </component>

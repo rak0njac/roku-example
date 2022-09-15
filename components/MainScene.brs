@@ -22,7 +22,7 @@ sub init()
 end sub
 
 sub fillGlobalContentVar()
-  m.global.addFields({content: m.contentTask.content, details: m.details, grid: m.grid, exit: m.exit, toast: m.toast})
+  m.global.addFields({content: m.contentTask.content, details: m.details, grid: m.grid, exit: m.exit, toast: m.toast, scene: m.top})
   m.grid.content = m.global.content
 
   if m.splashTimer = invalid
