@@ -1,8 +1,14 @@
 sub init()
   m.top.setFocus(true)
+  args = m.global.args
+
+
 
   m.contentTask = createObject("roSGNode", "NewContentReaderTask")
   m.contentTask.contenturi = "https://api.npoint.io/b096a65d709fbe682348"
+  if args.DoesExist("contentId") and args.DoesExist("mediaType") then
+    m.contentTask.argsId = args.contentId
+  end if
   m.contentTask.control = "RUN"
   m.contentTask.observeField("content", "fillGlobalContentVar")
 
@@ -25,6 +31,11 @@ sub fillGlobalContentVar()
   m.global.addFields({content: m.contentTask.content, details: m.details, grid: m.grid, exit: m.exit, toast: m.toast, scene: m.top})
   m.grid.content = m.global.content
 
+  if m.global.deepLinkedContent <> invalid
+    m.details.content = m.global.deepLinkedContent
+    m.details.deepLinked = true
+  end if
+
   if m.splashTimer = invalid
     hideSplash()
   end if
@@ -39,6 +50,8 @@ sub splashTimerFired()
 end sub
 
 sub hideSplash()
-  m.grid.setFocus(true)
+  if m.details.deepLinked = false then
+    m.grid.setFocus(true)
+  end if
   m.splash.visible = false
 end sub

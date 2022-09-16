@@ -1,9 +1,11 @@
-sub Main()
+sub Main(args as Dynamic)
     screen = CreateObject("roSGScreen")
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)
 
-    screen.CreateScene("MainScene")
+    gl = screen.getGlobalNode()
+    gl.addFields({args: args})
+    scene = screen.CreateScene("MainScene")
     screen.show()
 
     gl = screen.getGlobalNode()

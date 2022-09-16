@@ -37,6 +37,10 @@ sub getcontent()
         'setup
         channelContent = categoryContent.createChild("CustomContentNode")
         channelContent.id = channel.id
+        if channelContent.id = m.top.argsId then
+          m.global.addFields({deepLinkedContent: channelContent})
+        end if
+
         channelContent.categoryId = channel.categoryid
 
         'favorite

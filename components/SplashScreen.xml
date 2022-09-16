@@ -3,16 +3,16 @@
   <script type="text/brightscript" uri="SplashScreen.brs"/>
 
   <children>
-  <Rectangle width="1280" height="720" color="0x000000FF"/>
+  <Rectangle width="1920" height="1080" color="0x000000FF"/>
 
-    <Label id="splash_text" width="1280" translation="[0, 260]" horizAlign="center" color="0xFFFF00FF">
-        <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="48" />
+    <Label id="splash_text" width="1920" translation="[0, 390]" horizAlign="center" color="0xFFFF00FF">
+        <Font role="font" uri="pkg:/fonts/OpenSans-Bold.ttf" size="72" />
     </Label>
 
-    <Poster width = "50" height = "50" translation="[465,500]" id="splash_circle_1" uri="pkg:/images/splash_asset.png" blendColor="0xFFFF00FF"/>
-    <Poster width = "50" height = "50" translation="[565,500]" id="splash_circle_2" uri="pkg:/images/splash_asset.png" blendColor="0xFF0000FF"/>
-    <Poster width = "50" height = "50" translation="[665,500]" id="splash_circle_3" uri="pkg:/images/splash_asset.png" blendColor="0x00FFFFFF"/>
-    <Poster width = "50" height = "50" translation="[765,500]" id="splash_circle_4" uri="pkg:/images/splash_asset.png" blendColor="0xFF00FFFF"/>
+    <Poster width = "75" height = "75" translation="[697.5,750]" id="splash_circle_1" uri="pkg:/images/splash_asset.png" blendColor="0xFFFF00FF"/>
+    <Poster width = "75" height = "75" translation="[847.5,750]" id="splash_circle_2" uri="pkg:/images/splash_asset.png" blendColor="0xFF0000FF"/>
+    <Poster width = "75" height = "75" translation="[997.5,750]" id="splash_circle_3" uri="pkg:/images/splash_asset.png" blendColor="0x00FFFFFF"/>
+    <Poster width = "75" height = "75" translation="[1147.5,750]" id="splash_circle_4" uri="pkg:/images/splash_asset.png" blendColor="0xFF00FFFF"/>
 
 <ParallelAnimation id="anim" repeat="true">
         <Animation id="anim_c1"

@@ -1,5 +1,6 @@
 sub init()
     m.top.observeField("visible", "showDetails")
+    m.top.observeField("deepLinked", "playVideoImmediately")
 
     'animation logic
     m.animationIn = m.top.findNode("animation_fly_in")
@@ -38,12 +39,12 @@ sub init()
     drawingStyles = {
         "purple":{
             "fontUri": "pkg:/fonts/OpenSans-Regular.ttf"
-            "fontSize" : 15
+            "fontSize" : 22.5
             "color": "#8A2BE2FF"
         }
         "default":{
             "fontUri": "pkg:/fonts/OpenSans-Regular.ttf"
-            "fontSize" : 15
+            "fontSize" : 22.5
             "color": "#8A8A8AFF"
         }
     }
@@ -51,12 +52,12 @@ sub init()
     drawingStylesSmall = {
         "purple":{
             "fontUri": "pkg:/fonts/OpenSans-Light.ttf"
-            "fontSize" : 12
+            "fontSize" : 18
             "color": "#8A2BE2FF"
         }
         "default":{
             "fontUri": "pkg:/fonts/OpenSans-Light.ttf"
-            "fontSize" : 12
+            "fontSize" : 18
             "color": "#8A8A8AFF"
         }
     }
@@ -110,9 +111,9 @@ end sub
 sub handleBackPress()
     if m.top.isVideoFullScreen then
         m.top.isVideoFullScreen = false
-        m.video.width = 370
-        m.video.height = 208
-        m.video.translation = [850, 450]
+        m.video.width = 555
+        m.video.height = 312
+        m.video.translation = [1275, 675]
         m.fsBtn.setFocus(true)
     else
         m.animationOut.control = "start"
@@ -132,11 +133,20 @@ sub changeplayButtonText()
     end if
 end sub
 
-sub assignVideoContent(content as dynamic)   'prevents video playback from stopping when adding/removing movie from favorites
+sub playVideo(content as dynamic)   'prevents video playback from stopping when adding/removing movie from favorites
     newContent = CreateObject("RoSGNode", "CustomContentNode")
     newContent.url = content.url
     newContent.streamformat = content.streamformat
     m.video.content = newContent
+    m.video.control = "play"
+end sub
+
+sub setVideoFullScreen()
+    m.top.isVideoFullScreen = true
+    m.video.width = 1920
+    m.video.height = 1080
+    m.video.translation = [0,0]
+    m.video.setFocus(true)
 end sub
 
 sub handleBtnPress()
@@ -152,22 +162,22 @@ sub handleBtnPress()
             m.video.control = "replay"
         else
             'm.video.content = m.top.content
-            assignVideoContent(m.top.content)
-            m.video.control = "play"
+            playVideo(m.top.content)
         end if
 
     'go to full screen button
     else if m.fsBtn.hasfocus() then
-        m.top.isVideoFullScreen = true
-        m.video.width = 1280
-        m.video.height = 720
-        m.video.translation = [0,0]
-        m.video.setFocus(true)
-
+        setVideoFullScreen()
     'favorites button
     else 
         addFavoriteToRegistry(m.top.content.id)
     endif
+end sub
+
+sub playVideoImmediately()
+    m.top.visible = true
+    playVideo(m.top.content)
+    setVideoFullScreen()
 end sub
 
 sub addFavoriteToRegistry(movieId as dynamic)

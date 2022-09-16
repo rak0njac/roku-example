@@ -5,36 +5,36 @@
   <children>
     <RowList 
       id = "lGrid" 
-      translation = "[ 50, 260 ]" 
+      translation = "[ 75, 390 ]" 
       itemComponentName = "RowListItem" 
       numRows = "4" 
-      itemSize = "[ 1608, 350 ]" 
-      rowItemSize = "[ [150, 300] ]" 
-      itemSpacing = "[ 0, 40 ]" 
-      rowItemSpacing = "[[50, 0]]"
+      itemSize = "[ 1920, 525 ]" 
+      rowItemSize = "[ [225, 450] ]" 
+      itemSpacing = "[ 0, 60 ]" 
+      rowItemSpacing = "[[75, 0]]"
       showRowLabel = "[ true ]" 
       drawFocusFeedback = "false" 
       vertFocusAnimationStyle = "fixedFocusWrap" 
       rowFocusAnimationStyle = "fixedFocusWrap" />
 
 
-    <LayoutGroup translation="[50,50]" itemSpacings="[10]">
+    <LayoutGroup translation="[75,75]" itemSpacings="[15]">
     <Label
         id="lbTopTitle"
         font = "font:LargeBoldSystemFont"
     />
     <Label
         id="lbTopDesc"
-        width = "1000"
-        height = "400"
+        width = "1500"
+        height = "600"
         wrap = "true"
     />
       
   </LayoutGroup>
-<Label id="no_results" visible="false" width = "1280" horizAlign = "center" translation = "[0, 560]"/>
+<Label id="no_results" visible="false" width = "1920" horizAlign = "center" translation = "[0, 840]"/>
 
-  <Search translation="[30, 200]" visible="false" id="search" clippingRect="[ 0.0, 0.0, 1280.0, 60.0 ]">
-      <Label id="search_placeholder" translation="[30,12]" text = "Press * to search..."/>
+  <Search translation="[45, 300]" visible="false" id="search" clippingRect="[ 0.0, 0.0, 1920.0, 90.0 ]">
+      <Label id="search_placeholder" translation="[45,18]" text = "Press * to search..."/>
   </Search>
 
 
@@ -44,11 +44,11 @@
        easeFunction="linear" >
       <FloatFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ 60.0 , 303.0 ]"
+        keyValue="[ 90.0 , 455.0 ]"
         fieldToInterp="search.vertical_clipping_rect" />
       <Vector2DFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ [50, 260] , [50, 500]]"
+        keyValue="[ [75, 390] , [75, 750]]"
         fieldToInterp="lGrid.translation" />
     </Animation>
 
@@ -59,11 +59,11 @@
        easeFunction="linear" >
       <FloatFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ 303.0 , 60.0  ]"
+        keyValue="[ 455.0 , 90.0  ]"
         fieldToInterp="search.vertical_clipping_rect" />
       <Vector2DFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ [50, 500] , [50, 260]]"
+        keyValue="[ [75, 750] , [75, 390]]"
         fieldToInterp="lGrid.translation" />
     </Animation>
   </children>

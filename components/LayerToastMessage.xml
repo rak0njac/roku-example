@@ -8,8 +8,8 @@
 
     <children>
     <Group id="grp" opacity="0">
-        <Rectangle width = "1240" height = "40" color = "0x00000088"/>
-        <Label id="label" translation = "[10,10]" text = "Success displaying toast message"/>
+        <Rectangle width = "1860" height = "60" color = "0x00000088"/>
+        <Label id="label" translation = "[15,15]" text = "Success displaying toast message"/>
     </Group>
 
         <Animation id="animIn"

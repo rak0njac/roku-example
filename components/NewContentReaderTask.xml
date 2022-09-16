@@ -4,6 +4,7 @@
   <interface>
     <field id = "contenturi" type = "uri" />
     <field id = "content" type = "node" />
+    <field id = "argsId" type = "string" />
   </interface>
 
   <script type = "text/brightscript" uri="NewContentReaderTask.brs"/>
