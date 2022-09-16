@@ -93,6 +93,8 @@ else
     end if
     m.grid.setFocus(true)
 end if
+
+print m.search.isInFocusChain()
 end sub
 
 sub showExitDialog()

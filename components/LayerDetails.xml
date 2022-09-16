@@ -74,7 +74,7 @@
                 <MultiStyleLabel id="lower_directors"  width="600" wrap="true" text="Directors: Mimi Leder"/>
             </LayoutGroup>
         </LayoutGroup>
-        <Video translation="[1275, 675]" id="local_video" width="555" height="312"/>
+        <CustomVideo translation="[1275, 675]" id="local_video" width="555" height="312"/>
 
 
             <Animation id="animation_fly_in"

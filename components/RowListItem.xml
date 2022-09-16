@@ -18,7 +18,8 @@
         id = "itemPoster" 
         width = "225" 
         height = "343.5" 
-        scaleRotateCenter = "[ 112.5, 171.75 ]" />
+        scaleRotateCenter = "[ 0,0 ]" 
+        translation = "[10,20]"/>
 
       <Rectangle 
         id = "itemMask" 
@@ -26,31 +27,35 @@
         opacity = "0.75" 
         width = "225" 
         height = "343.5" 
-        scaleRotateCenter = "[ 112.5, 171.75 ]" />
+        scaleRotateCenter = "[ 112.5, 171.75 ]"
+        translation = "[10,20]" />
 
       <ScrollingLabel
+      color = "0x888888FF"
           id = "mgiTitle"
           text = "test1"
           maxWidth = "225" 
           font = "font:MediumBoldSystemFont" 
-          translation = "[0, 360]"/>
+          translation = "[10, 380]"/>
 
       <ScrollingLabel
+      color = "0x888888FF"
           id = "mgiYear"
           maxWidth = "225" 
           text = "test1"
           font = "font:SmallestSystemFont" 
-          translation = "[0, 405]"/>
+          translation = "[10, 425]"/>
 
       <ScrollingLabel
+      color = "0x888888FF"
           id = "mgiGenre"
           maxWidth = "225" 
           text = "test1"
           font = "font:SmallestSystemFont"
-          translation = "[0, 435]" />
+          translation = "[10, 455]" />
 
     <Poster 
-    translation = "[7.5,7.5]"
+    translation = "[17.5,27.5]"
     id = "isFavorite"
     width = "60"
     height = "60"

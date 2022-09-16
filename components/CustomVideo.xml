@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name = "CustomVideo" extends = "Video" >
+
+<interface>
+    <field id="playbackMode" type="string" value="normal" />
+    <field id="isFullScreen" type="boolean" value="false" />
+    <field id="position" type="integer" />
+</interface>
+
+<script type="text/brightscript" uri="CustomVideo.brs" />
+
+<children>
+    <Group id="overlay" visible="false">
+        <Rectangle width="1920" height="1080" color="0x00000088"/>
+        <Label id="label_pos" width="1920" horizAlign="center" translation="[0,700]"/>
+
+        <LayoutGroup translation="[960, 800]" horizAlignment="center" layoutDirection="horizontal" itemSpacings="[200]">
+            <Poster width="100" height="100" id="rewind" uri="pkg:/images/rewind.png"/>
+            <Poster width="100" height="100" id="pause" uri="pkg:/images/pause.png"/>
+            <Poster width="100" height="100" id="ff" uri="pkg:/images/ff.png"/>
+        </LayoutGroup>
+    </Group>
+</children>
+</component>

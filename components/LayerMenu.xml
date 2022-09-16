@@ -3,19 +3,24 @@
   <script type="text/brightscript" uri="LayerMenu.brs"/>
 
   <children>
+
+<Group id="grid_grp">
+
+    <Rectangle translation = "[75, 435]" width="263" height="500"/>
+
     <RowList 
       id = "lGrid" 
       translation = "[ 75, 390 ]" 
       itemComponentName = "RowListItem" 
       numRows = "4" 
-      itemSize = "[ 1920, 525 ]" 
-      rowItemSize = "[ [225, 450] ]" 
-      itemSpacing = "[ 0, 60 ]" 
+      itemSize = "[ 1920, 600 ]" 
+      rowItemSize = "[ [235, 1] ]"  
       rowItemSpacing = "[[75, 0]]"
       showRowLabel = "[ true ]" 
       drawFocusFeedback = "false" 
       vertFocusAnimationStyle = "fixedFocusWrap" 
       rowFocusAnimationStyle = "fixedFocusWrap" />
+      </Group>
 
 
     <LayoutGroup translation="[75,75]" itemSpacings="[15]">
@@ -48,8 +53,8 @@
         fieldToInterp="search.vertical_clipping_rect" />
       <Vector2DFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ [75, 390] , [75, 750]]"
-        fieldToInterp="lGrid.translation" />
+        keyValue="[ [0, 0] , [0, 360]]"
+        fieldToInterp="grid_grp.translation" />
     </Animation>
 
     
@@ -63,8 +68,8 @@
         fieldToInterp="search.vertical_clipping_rect" />
       <Vector2DFieldInterpolator 
         key="[0.0, 1.0]"
-        keyValue="[ [75, 750] , [75, 390]]"
-        fieldToInterp="lGrid.translation" />
+        keyValue="[ [0, 360] , [0, 0]]"
+        fieldToInterp="grid_grp.translation" />
     </Animation>
   </children>
 </component>

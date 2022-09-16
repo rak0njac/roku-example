@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="Search" extends="Keyboard">
+<component name="Search" extends="DynamicKeyboard">
 <script type="text/brightscript" uri="Search.brs" />
   <interface>
     <field id="vertical_clipping_rect" type="float" />

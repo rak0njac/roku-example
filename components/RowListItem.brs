@@ -23,19 +23,32 @@ end sub
 sub showfocus()
   scale = 1 + (m.top.focusPercent * 0.08)
   m.itemposter.scale = [scale, scale]
+  m.title.translation = [10, 380 + m.top.focusPercent * 20]
+  m.genre.translation = [10, 425 + m.top.focusPercent * 20]
+  m.year.translation = [10, 455 + m.top.focusPercent * 20]
 end sub
 sub showrowfocus()
+  scale = 1 + (m.top.rowfocusPercent * 0.08)
+  m.itemposter.scale = [scale, scale]
+  m.title.translation = [10, 380 + m.top.rowfocusPercent * 20]
+  m.genre.translation = [10, 425 + m.top.rowfocusPercent * 20]
+  m.year.translation = [10, 455 + m.top.rowfocusPercent * 20]
   m.itemmask.opacity = 0.75 - (m.top.rowFocusPercent * 0.75)
-  'm.itemlabel.opacity = m.top.rowFocusPercent
 end sub
 
 sub handlefocus()
   if m.top.itemHasFocus = true then
+    m.title.color = "0x000000FF"
+    m.genre.color = "0x000000FF"
+    m.year.color = "0x000000FF"
     m.title.repeatCount = 10
     m.title.scrollspeed = 100
     m.genre.repeatCount = 10
     m.genre.scrollspeed = 100
   else
+    m.title.color = "0x888888FF"
+    m.genre.color = "0x888888FF"
+    m.year.color = "0x888888FF"
     m.title.repeatCount = 0
     m.title.scrollspeed = 0
     m.genre.repeatCount = 0

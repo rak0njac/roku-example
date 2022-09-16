@@ -1,4 +1,5 @@
 sub init()
+  m.top.textEditBox.voiceEntryType = "generic"
   m.top.observeField("vertical_clipping_rect", "changeClippingRect")
 end sub
 
